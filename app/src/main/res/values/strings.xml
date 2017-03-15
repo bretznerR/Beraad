@@ -7,4 +7,6 @@
     <string name="titre_event">Le titre de l\'événement</string>
     <string name="avenir">À venir</string>
     <string name="joursRestants">Dans 3 jours</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
 </resources>
