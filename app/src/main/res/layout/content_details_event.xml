@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/parisguidetower" />
+
+    <TextView
+        android:text="Nom de l'événement"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView4"
+        android:textAlignment="center"
+        android:textSize="26dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_place"
+            android:id="@+id/imageView3" />
+
+        <TextView
+            android:text="211 avenue Jean Jaurès, 75019 Paris"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView6" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="44dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_date"
+            android:id="@+id/imageView4" />
+
+        <TextView
+            android:text="21/12/2016"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView7" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_horloge"
+            android:id="@+id/imageView5"
+            android:layout_marginLeft="20dp" />
+
+        <TextView
+            android:text="19:05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView8" />
+    </LinearLayout>
+
+    <TextView
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas et metus a tempor. Suspendisse hendrerit facilisis nisi a consectetur. Etiam tempor feugiat magna, vitae dignissim massa viverra eget. Nunc laoreet magna vitae est venenatis egestas."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView5" />
+
+</LinearLayout>
