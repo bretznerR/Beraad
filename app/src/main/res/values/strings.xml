@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Beraad</string>
+    <string name="action_settings">Settings</string>
+    <string name="populaire">Populaire</string>
+    <string name="recent">Récent</string>
+    <string name="nb_participants">12</string>
+    <string name="titre_event">Le titre de l\'événement</string>
+    <string name="avenir">À venir</string>
+    <string name="joursRestants">Dans 3 jours</string>
+</resources>
