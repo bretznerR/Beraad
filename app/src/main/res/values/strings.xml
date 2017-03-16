@@ -9,4 +9,12 @@
     <string name="joursRestants">Dans 3 jours</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="Heure_event">19:05</string>
+    <string name="date_event">21/12/2016</string>
+    <string name="lieu_event">211 avenue Jean Jaurès, 75019 Paris</string>
+    <string name="titre_description_event">Description</string>
+    <string name="text_participation_button__event">J\'y serai !</string>
+    <string name="description_event">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas et metus a tempor. Suspendisse hendrerit facilisis nisi a consectetur. Etiam tempor feugiat magna, vitae dignissim massa viverra eget. Nunc laoreet magna vitae est venenatis egestas.</string>
+    <string name="nom_event">Nom de l\'événement</string>
+    <string name="auteur_event">par Adrien Lemaire</string>
 </resources>

@@ -13,68 +13,113 @@
         android:scaleType="centerCrop"
         tools:src="@drawable/parisguidetower" />
 
-    <TextView
-        android:text="Nom de l'événement"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView4"
-        android:textAlignment="center"
-        android:textSize="26dp" />
-
     <LinearLayout
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_place"
-            android:id="@+id/imageView3" />
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp">
 
         <TextView
-            android:text="211 avenue Jean Jaurès, 75019 Paris"
-            android:layout_width="wrap_content"
+            android:text="@string/nom_event"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:id="@+id/textView4"
+            android:textSize="26sp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            tools:ignore="UseCompoundDrawables">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_place"
+                android:id="@+id/imageView3" />
+
+            <TextView
+                android:text="@string/lieu_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView6" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_date"
+                android:id="@+id/imageView4" />
+
+            <TextView
+                android:text="@string/date_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView7" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_horloge"
+                android:id="@+id/imageView5"
+                android:layout_marginLeft="20dp"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView
+                android:text="@string/Heure_event"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView8" />
+        </LinearLayout>
+
+        <TextView
+            android:text="@string/titre_description_event"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView6" />
+            android:id="@+id/textView10"
+            android:textAlignment="viewStart"
+            android:textSize="16sp"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:text="@string/description_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView5"
+            android:layout_marginTop="5dp"
+            android:textAlignment="textStart" />
+
+        <TextView
+            android:text="@string/auteur_event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView11"
+            android:textSize="10sp"
+            android:layout_marginTop="10dp"
+            android:lineSpacingExtra="18sp"
+            android:textAlignment="viewStart"
+            android:textColor="@color/colorAccent"
+            tools:ignore="SmallSp" />
+
+        <Button
+            android:text="@string/text_participation_button__event"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_marginTop="30dp" />
+
     </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="44dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_date"
-            android:id="@+id/imageView4" />
-
-        <TextView
-            android:text="21/12/2016"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView7" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_horloge"
-            android:id="@+id/imageView5"
-            android:layout_marginLeft="20dp" />
-
-        <TextView
-            android:text="19:05"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView8" />
-    </LinearLayout>
-
-    <TextView
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas et metus a tempor. Suspendisse hendrerit facilisis nisi a consectetur. Etiam tempor feugiat magna, vitae dignissim massa viverra eget. Nunc laoreet magna vitae est venenatis egestas."
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/textView5" />
 
 </LinearLayout>
