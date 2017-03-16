@@ -13,7 +13,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +25,6 @@ public class AccueilEventsActivity extends AppCompatActivity {
     private SortedSet evenements_trie_date;
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
-    private LinearLayout bloc_event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,16 +50,16 @@ public class AccueilEventsActivity extends AppCompatActivity {
         //définit l'agencement des cellules, ici de façon verticale, comme une ListView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        recyclerView.setAdapter(new EvenementAdapter(evenements_trie_date));
+        recyclerView.setAdapter(new EvenementAdapter(evenements_trie_date,this));
 
-        /*bloc_event = (LinearLayout) findViewById(R.id.cell_event);
-        toolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(AccueilEventsActivity.this, DetailsEventActivity.class);
-                startActivity(intent);
-            }
-        });*/
+//        bloc_event = (LinearLayout) findViewById(R.id.cell_event);
+//        toolbar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(AccueilEventsActivity.this, DetailsEventActivity.class);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override
@@ -88,12 +86,12 @@ public class AccueilEventsActivity extends AppCompatActivity {
 
     private void ajouterEvenements() {
 
-        evenements_trie_date.add(new Evenement("Tournois de foot","http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg",31,37,new DateTest(2017,11,12).getDate()));
-        evenements_trie_date.add(new Evenement("GROSSE SOIREE CHEZ RAPHAEL","http://www.csgo.ca/wp-content/uploads/2016/09/party.jpg",120,120,new DateTest(2017,3,16).getDate()));
-        evenements_trie_date.add(new Evenement("Nouvel an 2046","http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg",1002,1007,new DateTest(2017,05,1).getDate()));
-        evenements_trie_date.add(new Evenement("Madame invite : Rezz, Loge21, Moonbase au Trabendo le 7 avril","http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg",761,765,new DateTest(2020,1,12).getDate()));
-        evenements_trie_date.add(new Evenement("GROSSE SOIREE CHEZ RAPHAEL","http://www.csgo.ca/wp-content/uploads/2016/09/party.jpg",12,12,new DateTest(2007,11,10).getDate()));
-        evenements_trie_date.add(new Evenement("Nouvel an 2046","http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg",45,80,new DateTest(2017,3,15).getDate()));
+        evenements_trie_date.add(new Evenement("Tournois de foot", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"A l'occasion du 7829eme anniversaire de XXXX, un tournoi de foot a été organisé pour tous les amoureux de foot... Venez nombreux, plein de cadeaux à gagner !!","12 rue de la Paix, Paris","Jean"));
+        evenements_trie_date.add(new Evenement("GROSSE SOIREE CHEZ RAPHAEL", "http://www.csgo.ca/wp-content/uploads/2016/09/party.jpg", 120, 120, new DateTest(2017, 3, 16).getDate(),"Ramener les bières et des gateaux, je m'occupe du reste ! :p","140 rue de la Nouvelle France, Montreuil","Pierre"));
+        evenements_trie_date.add(new Evenement("Nouvel an 2046", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 1002, 1007, new DateTest(2017, 05, 1).getDate(),"Fetons le nouvel an ensemble !!!!! ehehehehhe","489 avenue Salvador Allende, Ivry-Sur-Seine","Raphaël"));
+        evenements_trie_date.add(new Evenement("Madame invite : Rezz, Loge21, Moonbase au Trabendo le 7 avril", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 761, 765, new DateTest(2020, 1, 12).getDate(),"Soirée au Trabendo, organisé par XXXX. Line up : REZZ , Loge21 & guests","56 avenue de la forêt, Paris","Adrien"));
+        evenements_trie_date.add(new Evenement("GROSSE SOIREE CHEZ RAPHAEL", "http://www.csgo.ca/wp-content/uploads/2016/09/party.jpg", 12, 12, new DateTest(2007, 11, 10).getDate(),"Comme dh'ab vous connaissez les bails à présent :D","31 rue du parc, Bobigny","Benjamin"));
+        evenements_trie_date.add(new Evenement("Nouvel an 2046", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 45, 80, new DateTest(2017, 3, 15).getDate(),"On est ici dans le turfu : 2046 !!","87 rue du cheval, Fontenay-Sous-Bois", "Alain"));
     }
 
     public void initNavigationDrawer() {

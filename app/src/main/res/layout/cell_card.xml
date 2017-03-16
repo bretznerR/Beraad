@@ -20,7 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:clickable="true"
         android:duplicateParentState="true"
         android:id="@+id/cell_event">
 
@@ -33,15 +32,13 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
-            tools:src="@drawable/parisguidetower"
-            android:clickable="false"/>
+            tools:src="@drawable/parisguidetower"/>
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
-            android:clickable="false">
+            android:gravity="center">
 
             <TextView
                 android:id="@+id/text"
@@ -53,15 +50,13 @@
                 android:fontFamily="sans-serif"
                 android:textColor="#333"
                 android:textSize="18sp"
-                android:layout_weight="0.06"
-                android:clickable="false"/>
+                android:layout_weight="0.06"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="21dp"
                 app:srcCompat="@drawable/participants_icon"
-                android:id="@+id/participant_icon"
-                android:clickable="false"/>
+                android:id="@+id/participant_icon"/>
 
             <TextView
                 android:text="@string/nb_participants"
@@ -70,8 +65,7 @@
                 android:id="@+id/nbParticipant"
                 android:textSize="16sp"
                 android:layout_weight="0.03"
-                android:textColor="@color/colorAccent"
-                android:clickable="false"/>
+                android:textColor="@color/colorAccent"/>
         </LinearLayout>
 
         <TextView
@@ -80,8 +74,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/textView"
             android:textSize="13sp"
-            android:layout_margin="5px"
-            android:clickable="false"/>
+            android:layout_margin="5px"/>
 
     </LinearLayout>
 

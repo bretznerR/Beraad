@@ -24,7 +24,7 @@
             android:text="@string/nom_event"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:id="@+id/textView4"
+            android:id="@+id/nom_event"
             android:textSize="26sp"
             android:layout_marginTop="10dp"
             android:layout_weight="1" />
@@ -46,7 +46,7 @@
                 android:text="@string/lieu_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView6" />
+                android:id="@+id/adresse_event" />
 
         </LinearLayout>
 
@@ -66,7 +66,7 @@
                 android:text="@string/date_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView7" />
+                android:id="@+id/date_event" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
                 android:text="@string/Heure_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView8" />
+                android:id="@+id/heure_event" />
         </LinearLayout>
 
         <TextView
@@ -96,7 +96,7 @@
             android:text="@string/description_event"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView5"
+            android:id="@+id/description_event"
             android:layout_marginTop="5dp"
             android:textAlignment="textStart" />
 
@@ -104,7 +104,7 @@
             android:text="@string/auteur_event"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView11"
+            android:id="@+id/auteur_event"
             android:textSize="10sp"
             android:layout_marginTop="10dp"
             android:lineSpacingExtra="18sp"

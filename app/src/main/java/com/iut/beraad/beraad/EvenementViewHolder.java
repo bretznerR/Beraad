@@ -1,5 +1,6 @@
 package com.iut.beraad.beraad;
 
+import android.content.Intent;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,6 +17,8 @@ import java.util.Calendar;
  */
 
 public class EvenementViewHolder extends RecyclerView.ViewHolder {
+
+    private Evenement evenement;
 
     private TextView textViewView;
     private ImageView imageView;
@@ -35,10 +38,25 @@ public class EvenementViewHolder extends RecyclerView.ViewHolder {
         icon_participants = (ImageView) itemView.findViewById(R.id.participant_icon);
         joursRestants = (TextView) itemView.findViewById(R.id.joursRestants);
         bloc_event = (LinearLayout) itemView.findViewById(R.id.bloc_event);
+
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent (bloc_event.getContext(), DetailsEventActivity.class);
+                intent.putExtra("titre_event",evenement.getTitre());
+                intent.putExtra("adresse_event",evenement.getAdresse());
+                intent.putExtra("date_event",evenement.getDateFormate());
+                intent.putExtra("heure_event",evenement.getHeure());
+                intent.putExtra("description_event",evenement.getDescription());
+                intent.putExtra("auteur_event","par "+evenement.getAuteur());
+                bloc_event.getContext().startActivity(intent);
+            }
+        });
     }
 
     //puis ajouter une fonction pour remplir la cellule en fonction d'un MyObject
     public void bind(Evenement evenement){
+        this.evenement = evenement;
         textViewView.setText(evenement.getTitre());
         Picasso.with(imageView.getContext()).load(evenement.getImageUrl()).centerCrop().fit().into(imageView);
         nbParticipantsView.setText(Integer.toString(evenement.getNbParticipants()));

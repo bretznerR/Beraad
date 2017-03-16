@@ -10,21 +10,28 @@ public class Evenement {
 
     private String imageUrl;
     private String titre;
-    // A rajouter : Géolocalisation Google
     private Date date;
     // A rajouter : Heure
-    private String Description;
+    private String description;
     private int nbPlaceMAX;
     private int nbParticipants;
     private boolean placeEstLimite;
     private boolean estPrivee;
+    // A rajouter : Géolocalisation Google
+    private String adresse;
+    private String heure;
+    private String auteur;
 
-    public Evenement(String titre, String url, int nbParticipants, int nbPlaceMAX, Date date) {
+    public Evenement(String titre, String url, int nbParticipants, int nbPlaceMAX, Date date, String description,String adresse, String auteur) {
         this.titre = titre;
         this.imageUrl = url;
         this.nbParticipants = nbParticipants;
         this.nbPlaceMAX = nbPlaceMAX;
         this.date = date;
+        this.description = description;
+        this.heure = "13:10";
+        this.adresse = adresse;
+        this.auteur = auteur;
     }
 
     public boolean isPlacesLibres() {
@@ -40,7 +47,7 @@ public class Evenement {
     }
 
     public String getDescription() {
-        return Description;
+        return description;
     }
 
     public int getNbPlaceMAX() {
@@ -61,5 +68,23 @@ public class Evenement {
 
     public Date getDate() {
         return date;
+    }
+
+    public String getDateFormate() {
+        System.out.println(getDate());
+        String[] DateDecoupe = this.getDate().toString().split(" ");
+        return DateDecoupe[2]+" "+DateDecoupe[1]+" "+DateDecoupe[5];
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public String getHeure() {
+        return heure;
+    }
+
+    public String getAuteur() {
+        return auteur;
     }
 }

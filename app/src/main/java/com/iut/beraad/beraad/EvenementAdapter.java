@@ -1,5 +1,6 @@
 package com.iut.beraad.beraad;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,24 +20,20 @@ import java.util.SortedSet;
 public class EvenementAdapter extends RecyclerView.Adapter<EvenementViewHolder> {
 
     private List<Evenement> list;
+    private Context context;
 
     //ajouter un constructeur prenant en entrée une liste
-    public EvenementAdapter(SortedSet<Evenement> list) {
+    public EvenementAdapter(SortedSet<Evenement> list,Context context) {
         this.list = new ArrayList<Evenement>(list);
         enleverAnciensEvenements();
     }
 
     public void enleverAnciensEvenements() {
-
         Iterator<Evenement> i = list.iterator();
-
         while(i.hasNext()) {
             Evenement e = i.next();
             if (NbrJourEntre2Date.differenceDate(Calendar.getInstance().getTime(),e.getDate())<0) i.remove();
         }
-        /*for (int i=0 ; i<this.list.size() ; i++) {
-            if (this.list.get(i).getDate().compareTo(Calendar.getInstance().getTime())<0) this.list.remove(i);
-        }*/
     }
 
     //cette fonction permet de créer les viewHolder
