@@ -19,7 +19,7 @@ import android.widget.Toast;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-public class accueil_events extends AppCompatActivity {
+public class AccueilEventsActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private SortedSet evenements_trie_date;
@@ -120,7 +120,7 @@ public class accueil_events extends AppCompatActivity {
         });
         View header = navigationView.getHeaderView(0);
         TextView tv_email = (TextView)header.findViewById(R.id.tv_email);
-        tv_email.setText("raj.amalw@learn2crack.com");
+        tv_email.setText("adresse@email.com");
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer);
 
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close){
