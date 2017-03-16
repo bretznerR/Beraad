@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".DetailsEventActivity"></activity>
+        <activity android:name=".AjoutEventActivity"></activity>
     </application>
 
 </manifest>
