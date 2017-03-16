@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ public class AccueilEventsActivity extends AppCompatActivity {
     private SortedSet evenements_trie_date;
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
+    private LinearLayout bloc_event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +52,16 @@ public class AccueilEventsActivity extends AppCompatActivity {
         //définit l'agencement des cellules, ici de façon verticale, comme une ListView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //pour adapter en grille comme une RecyclerView, avec 2 cellules par ligne
-        //recyclerView.setLayoutManager(new GridLayoutManager(this,2));
-
-        //puis créer un MyAdapter, lui fournir notre liste de villes.
-        //cet adapter servira à remplir notre recyclerview
         recyclerView.setAdapter(new EvenementAdapter(evenements_trie_date));
+
+        /*bloc_event = (LinearLayout) findViewById(R.id.cell_event);
+        toolbar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(AccueilEventsActivity.this, DetailsEventActivity.class);
+                startActivity(intent);
+            }
+        });*/
     }
 
     @Override

@@ -59,6 +59,8 @@ public class EvenementViewHolder extends RecyclerView.ViewHolder {
         } else {
             nbParticipantsView.setTextColor(ContextCompat.getColor(nbParticipantsView.getContext(), R.color.colorYES));
         }
+
+
     }
 }
 
