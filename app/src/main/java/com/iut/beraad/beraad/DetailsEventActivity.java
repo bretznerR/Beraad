@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 /**
  * Created by Adrien on 16/03/2017.
@@ -14,6 +17,7 @@ import android.widget.TextView;
 public class DetailsEventActivity extends AppCompatActivity {
 
     private TextView nom_event , adresse_event, date_event, heure_event, description_event, auteur_event;
+    private ImageView image_event;
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
 
@@ -21,7 +25,7 @@ public class DetailsEventActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_details_event);
-        
+
 
         nom_event = (TextView) findViewById(R.id.nom_event);
         adresse_event = (TextView) findViewById(R.id.adresse_event);
@@ -29,6 +33,7 @@ public class DetailsEventActivity extends AppCompatActivity {
         heure_event = (TextView) findViewById(R.id.heure_event);
         description_event = (TextView) findViewById(R.id.description_event);
         auteur_event = (TextView) findViewById(R.id.auteur_event);
+        image_event = (ImageView) findViewById(R.id.image_event);
 
         Intent myIntent = getIntent();
 
@@ -37,6 +42,10 @@ public class DetailsEventActivity extends AppCompatActivity {
         this.date_event.setText(myIntent.getStringExtra("date_event"));
         this.description_event.setText(myIntent.getStringExtra("description_event"));
         this.auteur_event.setText(myIntent.getStringExtra("auteur_event"));
+        //this.image_event.setImageResource();
+        Picasso.with(image_event.getContext()).load((myIntent.getStringExtra("image_event"))).centerCrop().fit().into(image_event);
+        //Picasso.with(imageView.getContext()).load(evenement.getImageUrl()).centerCrop().fit().into(imageView);
+
     }
 
 

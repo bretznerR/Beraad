@@ -73,7 +73,7 @@ public class Evenement {
     public String getDateFormate() {
         System.out.println(getDate());
         String[] DateDecoupe = this.getDate().toString().split(" ");
-        return DateDecoupe[2]+" "+DateDecoupe[1]+" "+DateDecoupe[5];
+        return DateDecoupe[2]+" "+traductionMois(DateDecoupe[1])+" "+DateDecoupe[5];
     }
 
     public String getAdresse() {
@@ -86,5 +86,51 @@ public class Evenement {
 
     public String getAuteur() {
         return auteur;
+    }
+
+    public String traductionMois(String s) {
+        String mois;
+        switch (s) {
+            case "Jan":
+                mois = "Janvier";
+            break;
+            case "Feb":
+                mois = "Février";
+                break;
+            case "Mar":
+                mois = "Mars";
+                break;
+            case "Apr":
+                mois = "Avril";
+                break;
+            case "May":
+                mois = "Mai";
+                break;
+            case "Jun":
+                mois = "Juin";
+                break;
+            case "Jul":
+                mois = "Juillet";
+                break;
+            case "Aug":
+                mois = "Août";
+                break;
+            case "Sep":
+                mois = "Septembre";
+                break;
+            case "Oct":
+                mois = "Octobre";
+                break;
+            case "Nov":
+                mois = "Novembre";
+                break;
+            case "Dec":
+                mois = "Décembre";
+                break;
+            default:
+                mois = s;
+            break;
+        }
+        return mois;
     }
 }

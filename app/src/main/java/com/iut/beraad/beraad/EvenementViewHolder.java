@@ -49,6 +49,7 @@ public class EvenementViewHolder extends RecyclerView.ViewHolder {
                 intent.putExtra("heure_event",evenement.getHeure());
                 intent.putExtra("description_event",evenement.getDescription());
                 intent.putExtra("auteur_event","par "+evenement.getAuteur());
+                intent.putExtra("image_event",evenement.getImageUrl());
                 bloc_event.getContext().startActivity(intent);
             }
         });
