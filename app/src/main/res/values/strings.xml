@@ -17,4 +17,6 @@
     <string name="description_event">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In egestas et metus a tempor. Suspendisse hendrerit facilisis nisi a consectetur. Etiam tempor feugiat magna, vitae dignissim massa viverra eget. Nunc laoreet magna vitae est venenatis egestas.</string>
     <string name="nom_event">Nom de l\'événement</string>
     <string name="auteur_event">par Adrien Lemaire</string>
+
+    <string name="google_maps_api_key">AIzaSyBu3SDK9aCGEkxDS5yyX6jT81jpkRkxeKA</string>
 </resources>
