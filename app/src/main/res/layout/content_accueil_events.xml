@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".AccueilEventsActivity"
-    tools:showIn="@layout/activity_accueil_events">
+    tools:context=".AccueilEventsActivity">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -20,7 +19,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.iut.beraad.beraad.AccueilEventsActivity"
-    tools:showIn="@layout/activity_accueil_events"
     android:orientation="vertical">
 
     <RelativeLayout

@@ -3,6 +3,8 @@ package com.iut.beraad.beraad;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,15 +18,26 @@ public class DetailsEventActivity extends AppCompatActivity {
 
     private TextView nom_event , adresse_event, date_event, heure_event, description_event, auteur_event;
     private ImageView image_event;
+    private Toolbar toolbar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_details_event);
-//        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//        View contentView = inflater.inflate(R.layout.content_details_event,null,false);
-//        mDrawer.addView(contentView,0);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                finish();
+            }
+        });
 
         nom_event = (TextView) findViewById(R.id.nom_event);
         adresse_event = (TextView) findViewById(R.id.adresse_event);
@@ -44,11 +57,7 @@ public class DetailsEventActivity extends AppCompatActivity {
         //this.image_event.setImageResource();
         Picasso.with(image_event.getContext()).load((myIntent.getStringExtra("image_event"))).centerCrop().fit().into(image_event);
         //Picasso.with(imageView.getContext()).load(evenement.getImageUrl()).centerCrop().fit().into(imageView);
-
     }
-
-
-
 
 
 }

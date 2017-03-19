@@ -1,6 +1,5 @@
 package com.iut.beraad.beraad;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,10 +19,9 @@ import java.util.SortedSet;
 public class EvenementAdapter extends RecyclerView.Adapter<EvenementViewHolder> {
 
     private List<Evenement> list;
-    private Context context;
 
     //ajouter un constructeur prenant en entrée une liste
-    public EvenementAdapter(SortedSet<Evenement> list,Context context) {
+    public EvenementAdapter(SortedSet<Evenement> list) {
         this.list = new ArrayList<Evenement>(list);
         enleverAnciensEvenements();
     }
