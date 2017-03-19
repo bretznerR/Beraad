@@ -1,6 +1,8 @@
 package com.iut.beraad.beraad;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,9 +17,7 @@ public class AccueilEventsActivity extends Fragment {
 
     private RecyclerView recyclerView;
     private SortedSet evenements_trie_date;
-//    private Toolbar toolbar;
-//    private DrawerLayout drawerLayout;
-//    private FloatingActionButton fab;
+    private FloatingActionButton fab;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -32,6 +32,15 @@ public class AccueilEventsActivity extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
         recyclerView.setAdapter(new EvenementAdapter(evenements_trie_date));
+
+        fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(),AjoutEventActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
 

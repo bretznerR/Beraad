@@ -2,7 +2,9 @@ package com.iut.beraad.beraad;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 
 import com.seatgeek.placesautocomplete.DetailsCallback;
@@ -37,10 +39,27 @@ public class AjoutEventActivity extends AppCompatActivity {
     @InjectView(R.id.zip)
     TextView mZip;
 
+    private Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_event);
+
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                finish();
+            }
+        });
+
         ButterKnife.inject(this);
 
         mAutocomplete.setOnPlaceSelectedListener(new OnPlaceSelectedListener() {
