@@ -1,11 +1,16 @@
 package com.iut.beraad.beraad;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.seatgeek.placesautocomplete.DetailsCallback;
 import com.seatgeek.placesautocomplete.OnPlaceSelectedListener;
@@ -14,6 +19,10 @@ import com.seatgeek.placesautocomplete.model.AddressComponent;
 import com.seatgeek.placesautocomplete.model.AddressComponentType;
 import com.seatgeek.placesautocomplete.model.Place;
 import com.seatgeek.placesautocomplete.model.PlaceDetails;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -27,19 +36,9 @@ public class AjoutEventActivity extends AppCompatActivity {
     @InjectView(R.id.places_autocomplete)
     PlacesAutocompleteTextView mAutocomplete;
 
-    @InjectView(R.id.street)
-    TextView mStreet;
-
-    @InjectView(R.id.city)
-    TextView mCity;
-
-    @InjectView(R.id.state)
-    TextView mState;
-
-    @InjectView(R.id.zip)
-    TextView mZip;
-
     private Toolbar toolbar;
+
+    Adresse adresse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,6 @@ public class AjoutEventActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(getApplicationContext(),MainActivity.class));
                 finish();
             }
         });
@@ -68,40 +66,7 @@ public class AjoutEventActivity extends AppCompatActivity {
                 mAutocomplete.getDetailsFor(place, new DetailsCallback() {
                     @Override
                     public void onSuccess(final PlaceDetails details) {
-                        System.out.println("test -> détails" + details);
-
-                        mStreet.setText(details.name);
-                        for (AddressComponent component : details.address_components) {
-                            for (AddressComponentType type : component.types) {
-                                switch (type) {
-                                    case STREET_NUMBER:
-                                        break;
-                                    case ROUTE:
-                                        break;
-                                    case NEIGHBORHOOD:
-                                        break;
-                                    case SUBLOCALITY_LEVEL_1:
-                                        break;
-                                    case SUBLOCALITY:
-                                        break;
-                                    case LOCALITY:
-                                        mCity.setText(component.long_name);
-                                        break;
-                                    case ADMINISTRATIVE_AREA_LEVEL_1:
-                                        mState.setText(component.short_name);
-                                        break;
-                                    case ADMINISTRATIVE_AREA_LEVEL_2:
-                                        break;
-                                    case COUNTRY:
-                                        break;
-                                    case POSTAL_CODE:
-                                        mZip.setText(component.long_name);
-                                        break;
-                                    case POLITICAL:
-                                        break;
-                                }
-                            }
-                        }
+                        getAdresse(details);
                     }
 
                     @Override
@@ -112,5 +77,32 @@ public class AjoutEventActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    public Adresse getAdresse(PlaceDetails details) {
+        adresse = new Adresse(details.address_components.get(0).long_name,
+                details.address_components.get(1).long_name,
+                details.address_components.get(2).long_name,
+                details.address_components.get(6).short_name,
+                details.address_components.get(3).long_name,
+                details.address_components.get(4).long_name,
+                details.address_components.get(5).long_name
+        );
+        System.out.println(adresse.toString());
+        return adresse;
+    }
+
+    public Evenement creerEvenement(String titre, String url, int nbParticipants, int nbPlaceMAX, Date date, String description, Adresse adresse, Personne auteur) {
+        return new Evenement(titre, url, nbParticipants, nbPlaceMAX, date, description, adresse, auteur);
+    }
+
+    public void showDatePickerDialog(View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        newFragment.show(getFragmentManager(), "datePicker");
+    }
+
+    public void showTimePickerDialog(View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        newFragment.show(getFragmentManager(), "timePicker");
     }
 }

@@ -18,11 +18,11 @@ public class Evenement {
     private boolean placeEstLimite;
     private boolean estPrivee;
     // A rajouter : Géolocalisation Google
-    private String adresse;
+    private Adresse adresse;
     private String heure;
-    private String auteur;
+    private Personne auteur;
 
-    public Evenement(String titre, String url, int nbParticipants, int nbPlaceMAX, Date date, String description,String adresse, String auteur) {
+    public Evenement(String titre, String url, int nbParticipants, int nbPlaceMAX, Date date, String description,Adresse adresse, Personne auteur) {
         this.titre = titre;
         this.imageUrl = url;
         this.nbParticipants = nbParticipants;
@@ -76,7 +76,7 @@ public class Evenement {
         return DateDecoupe[2]+" "+traductionMois(DateDecoupe[1])+" "+DateDecoupe[5];
     }
 
-    public String getAdresse() {
+    public Adresse getAdresse() {
         return adresse;
     }
 
@@ -84,7 +84,7 @@ public class Evenement {
         return heure;
     }
 
-    public String getAuteur() {
+    public Personne getAuteur() {
         return auteur;
     }
 

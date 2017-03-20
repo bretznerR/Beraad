@@ -20,8 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:duplicateParentState="true"
-        android:id="@+id/cell_event">
+        android:id="@+id/bloc_event">
 
         <!-- Les CardView agissent comme des FrameLayout,
          pour avoir une organisation verticale nous devons
@@ -32,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
-            tools:src="@drawable/parisguidetower"/>
+            tools:src="@drawable/parisguidetower" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -50,13 +49,13 @@
                 android:fontFamily="sans-serif"
                 android:textColor="#333"
                 android:textSize="18sp"
-                android:layout_weight="0.06"/>
+                android:layout_weight="0.06" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="21dp"
-                app:srcCompat="@drawable/participants_icon"
-                android:id="@+id/participant_icon"/>
+                app:srcCompat="@drawable/nb_participants"
+                android:id="@+id/imageView" />
 
             <TextView
                 android:text="@string/nb_participants"
@@ -64,17 +63,16 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/nbParticipant"
                 android:textSize="16sp"
-                android:layout_weight="0.03"
-                android:textColor="@color/colorAccent"/>
+                android:layout_weight="0.03" />
         </LinearLayout>
 
         <TextView
             android:text="@string/joursRestants"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/textView"
+            android:id="@+id/joursRestants"
             android:textSize="13sp"
-            android:layout_margin="5px"/>
+            android:layout_margin="5px" />
 
     </LinearLayout>
 

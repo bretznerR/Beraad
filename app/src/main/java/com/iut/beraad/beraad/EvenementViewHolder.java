@@ -44,11 +44,11 @@ public class EvenementViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View view) {
                 Intent intent = new Intent (bloc_event.getContext(), DetailsEventActivity.class);
                 intent.putExtra("titre_event",evenement.getTitre());
-                intent.putExtra("adresse_event",evenement.getAdresse());
+                intent.putExtra("adresse_event",evenement.getAdresse().toString());
                 intent.putExtra("date_event",evenement.getDateFormate());
                 intent.putExtra("heure_event",evenement.getHeure());
                 intent.putExtra("description_event",evenement.getDescription());
-                intent.putExtra("auteur_event","par "+evenement.getAuteur());
+                intent.putExtra("auteur_event","par "+evenement.getAuteur().toString());
                 intent.putExtra("image_event",evenement.getImageUrl());
                 bloc_event.getContext().startActivity(intent);
             }

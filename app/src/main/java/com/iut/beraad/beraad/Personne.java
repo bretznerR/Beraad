@@ -27,4 +27,9 @@ public class Personne {
     public String getEmail() {
         return email;
     }
+
+    @Override
+    public String toString() {
+        return nom + " " + prenom;
+    }
 }

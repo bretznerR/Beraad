@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
 
         setActual_user();
 //        this.prenom_nom_actual_user = (TextView)findViewById(R.id.ho);
-        Log.d("=================", this.prenom_nom_actual_user.toString());
+
         //this.prenom_nom_actual_user.setText(this.actual_user.getPrenom()+" "+this.actual_user.getNom());
     }
 
