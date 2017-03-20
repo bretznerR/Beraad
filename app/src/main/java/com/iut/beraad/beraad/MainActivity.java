@@ -9,7 +9,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 /**
  * Created by Adrien on 18/03/2017.
@@ -19,10 +21,10 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawer;
     private Toolbar toolbar;
     private NavigationView nvDrawer;
-
-    // Make sure to be using android.support.v7.app.ActionBarDrawerToggle version.
-    // The android.support.v4.app.ActionBarDrawerToggle has been deprecated.
     private ActionBarDrawerToggle drawerToggle;
+
+    private Personne actual_user;
+    private TextView prenom_nom_actual_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Fragment fragment=null;
-        Class fragmentClass = AccueilEventsActivity.class;
+        Class fragmentClass = AccueilEventsFragment.class;
 
         try {
          fragment = (Fragment) fragmentClass.newInstance();
@@ -57,6 +59,15 @@ public class MainActivity extends AppCompatActivity {
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
 
+        setActual_user();
+//        this.prenom_nom_actual_user = (TextView)findViewById(R.id.ho);
+        Log.d("=================", this.prenom_nom_actual_user.toString());
+        //this.prenom_nom_actual_user.setText(this.actual_user.getPrenom()+" "+this.actual_user.getNom());
+    }
+
+    //Temporaire
+    public void setActual_user() {
+        this.actual_user = new Personne("Lemaire","Adrien","exemple@exemple.fr");
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
@@ -104,19 +115,19 @@ public class MainActivity extends AppCompatActivity {
         Class fragmentClass;
         switch(menuItem.getItemId()) {
             case R.id.home:
-                fragmentClass = AccueilEventsActivity.class;
+                fragmentClass = AccueilEventsFragment.class;
                 break;
             case R.id.settings:
-                fragmentClass = AccueilEventsActivity.class;
+                fragmentClass = AccueilEventsFragment.class;
                 break;
             case R.id.trash:
-                fragmentClass = AccueilEventsActivity.class;
+                fragmentClass = AccueilEventsFragment.class;
                 break;
             case R.id.logout:
-                fragmentClass = AccueilEventsActivity.class;
+                fragmentClass = AccueilEventsFragment.class;
                 break;
             default:
-                fragmentClass = AccueilEventsActivity.class;
+                fragmentClass = AccueilEventsFragment.class;
         }
 
         try {
