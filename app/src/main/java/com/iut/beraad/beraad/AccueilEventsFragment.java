@@ -21,17 +21,12 @@ public class AccueilEventsFragment extends Fragment {
     private SortedSet<Evenement> evenements_trie_date;
     private FloatingActionButton fab;
 
-<<<<<<< HEAD
     private final int REQUEST_CODE = 20;
-=======
-    AjoutEventActivity ajoutEventActivity;
->>>>>>> origin/master
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.content_accueil_events,container,false);
-
         this.evenements_trie_date = new TreeSet(new ComparateurParDate());
         ajouterEvenements();
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
@@ -49,7 +44,6 @@ public class AccueilEventsFragment extends Fragment {
         return view;
     }
 
-<<<<<<< HEAD
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         // REQUEST_CODE est défini en attribut
@@ -74,7 +68,7 @@ public class AccueilEventsFragment extends Fragment {
             Date date = new DateTest(Integer.parseInt(annee), moisToInt(mois), Integer.parseInt(jour)).getDate();
             Adresse adresse = new Adresse(numeroRue, rue, ville, codePostal);
 
-            Personne p = new Personne("BRETZNER", "Raphaël", "rbretzner@gmail.com");
+            Personne p = new Personne("BRETZNER", "Raphaël", "rbretzner@gmail.com", "");
             Evenement evenement = new Evenement(nomEvent, "", 0,
                     Integer.valueOf(nbPlaceEvent), date,
                     descriptionEvent, adresse, p, Boolean.valueOf(estPrive));
@@ -87,54 +81,29 @@ public class AccueilEventsFragment extends Fragment {
 
         evenements_trie_date.add(new Evenement("Tournois de foot", "http://img4.hostingpics.net/pics/6852211195325unscandaledevasionfiscaleeclabousselefootballitalienwebtete021648790152.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"A l'occasion du 7829eme anniversaire de XXXX, un tournoi de foot a été organisé pour tous les amoureux de foot... Venez nombreux, plein de cadeaux à gagner !!",
                 new Adresse("17", "allée jean jacques rousseau", "Les Pavillons Sous Bois", "93320"),
-                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com"), false)
+                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com", ""), false)
         );
         evenements_trie_date.add(new Evenement("GROSSE SOIREE CHEZ RAPHAEL", "http://www.csgo.ca/wp-content/uploads/2016/09/party.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"Ramener les bières et des gateaux, je m'occupe du reste ! :p",
                 new Adresse("140", "rue de la nouvelle france", "Montreuil", "93100"),
-                new Personne("Adrien", "Lemaire", "alemaire@gmail.com"), false)
+                new Personne("Adrien", "Lemaire", "alemaire@gmail.com", ""), false)
         );
         evenements_trie_date.add(new Evenement("Nouvel an 2046", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 31, 37, new DateTest(2017, 03, 28).getDate(),"\"Fetons le nouvel an ensemble !!!!! ehehehehhe",
                 new Adresse("489", "avenue Salvador Allende", "Ivry-Sur-Seine", "92500"),
-                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com"), false)
+                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com", ""), false)
         );
         evenements_trie_date.add(new Evenement("Madame invite : Rezz, Loge21, Moonbase au Trabendo le 7 avril", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"Soirée au Trabendo, organisé par XXXX. Line up : REZZ , Loge21 & guests",
                 new Adresse("56", "avenue de la forêt", "Paris", "75005"),
-                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com"), false)
+                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com", ""), false)
         );
         evenements_trie_date.add(new Evenement("GROSSE SOIREE CHEZ RAPHAEL", "http://www.csgo.ca/wp-content/uploads/2016/09/party.jpg", 31, 37, new DateTest(2017, 06, 12).getDate(),"Ramener les bières et des gateaux, je m'occupe du reste ! :p",
                 new Adresse("140", "rue de la nouvelle france", "Montreuil", "93100"),
-                new Personne("Adrien", "Lemaire", "alemaire@gmail.com"), false)
+                new Personne("Adrien", "Lemaire", "alemaire@gmail.com", ""), false)
         );
         evenements_trie_date.add(new Evenement("Nouvel an 2046", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 31, 37, new DateTest(2017, 07, 12).getDate(),"\"Fetons le nouvel an ensemble !!!!! ehehehehhe",
                 new Adresse("489", "avenue Salvador Allende", "Ivry-Sur-Seine", "92500"),
-                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com"), false)
-=======
-    public void ajouterEvenements() {
-        evenements_trie_date.add(ajoutEventActivity.creerEvenement("Tournois de foot", "http://img4.hostingpics.net/pics/6852211195325unscandaledevasionfiscaleeclabousselefootballitalienwebtete021648790152.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"A l'occasion du 7829eme anniversaire de XXXX, un tournoi de foot a été organisé pour tous les amoureux de foot... Venez nombreux, plein de cadeaux à gagner !!",
-                new Adresse("17", "allée jean jacques rousseau", "Les Pavillons Sous Bois", "93320", "Seine-Saint-Denis", "Ile-de-France", "France"),
-                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com","https://pbs.twimg.com/profile_images/627117609444581380/7YG7kxA4.png"))
+                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com", ""), false)
         );
-        evenements_trie_date.add(ajoutEventActivity.creerEvenement("GROSSE SOIREE CHEZ RAPHAEL", "http://www.csgo.ca/wp-content/uploads/2016/09/party.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"Ramener les bières et des gateaux, je m'occupe du reste ! :p",
-                new Adresse("140", "rue de la nouvelle france", "Montreuil", "93100", "Seine-Saint-Denis", "Ile-de-France", "France"),
-                new Personne("Adrien", "Lemaire", "alemaire@gmail.com","https://pbs.twimg.com/profile_images/627117609444581380/7YG7kxA4.png"))
-        );
-        evenements_trie_date.add(ajoutEventActivity.creerEvenement("Nouvel an 2046", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"\"Fetons le nouvel an ensemble !!!!! ehehehehhe",
-                new Adresse("489", "avenue Salvador Allende", "Ivry-Sur-Seine", "92500", "Seine-Saint-Denis", "Ile-de-France", "France"),
-                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com","https://pbs.twimg.com/profile_images/627117609444581380/7YG7kxA4.png"))
-        );
-        evenements_trie_date.add(ajoutEventActivity.creerEvenement("Madame invite : Rezz, Loge21, Moonbase au Trabendo le 7 avril", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"Soirée au Trabendo, organisé par XXXX. Line up : REZZ , Loge21 & guests",
-                new Adresse("56", "avenue de la forêt", "Paris", "75005", "Seine-Saint-Denis", "Ile-de-France", "France"),
-                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com","https://pbs.twimg.com/profile_images/627117609444581380/7YG7kxA4.png"))
-        );
-        evenements_trie_date.add(ajoutEventActivity.creerEvenement("GROSSE SOIREE CHEZ RAPHAEL", "http://www.csgo.ca/wp-content/uploads/2016/09/party.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"Ramener les bières et des gateaux, je m'occupe du reste ! :p",
-                new Adresse("140", "rue de la nouvelle france", "Montreuil", "93100", "Seine-Saint-Denis", "Ile-de-France", "France"),
-                new Personne("Adrien", "Lemaire", "alemaire@gmail.com","https://pbs.twimg.com/profile_images/627117609444581380/7YG7kxA4.png"))
-        );
-        evenements_trie_date.add(ajoutEventActivity.creerEvenement("Nouvel an 2046", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"\"Fetons le nouvel an ensemble !!!!! ehehehehhe",
-                new Adresse("489", "avenue Salvador Allende", "Ivry-Sur-Seine", "92500", "Seine-Saint-Denis", "Ile-de-France", "France"),
-                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com","https://pbs.twimg.com/profile_images/627117609444581380/7YG7kxA4.png"))
->>>>>>> origin/master
-        );
+
     }
 
     public void ajouterEvenement(Evenement e) {
