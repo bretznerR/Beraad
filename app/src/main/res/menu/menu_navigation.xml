@@ -2,20 +2,20 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/home"
-            android:title="Home"
+            android:id="@+id/nav_accueil"
+            android:title="Accueil"
             android:icon="@drawable/ic_home"/>
         <item
-            android:id="@+id/settings"
-            android:title="Settings"
-            android:icon="@drawable/ic_setting"/>
+            android:id="@+id/nav_participations"
+            android:title="Mes participations"
+            android:icon="@drawable/ic_playlist_add_check"/>
         <item
-            android:id="@+id/trash"
-            android:title="Trash"
-            android:icon="@drawable/ic_trash"/>
+            android:id="@+id/nav_evenements"
+            android:title="Mes événements"
+            android:icon="@drawable/ic_view_list"/>
         <item
-            android:id="@+id/logout"
-            android:title="Logout"
-            android:icon="@drawable/ic_exit"/>
+            android:id="@+id/nav_amis"
+            android:title="Mes amis"
+            android:icon="@drawable/ic_people"/>
     </group>
 </menu>

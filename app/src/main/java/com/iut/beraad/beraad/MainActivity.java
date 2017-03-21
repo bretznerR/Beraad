@@ -98,6 +98,12 @@ public class MainActivity extends AppCompatActivity {
                 }
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+//                Ici on décoche l'item selectionné dans la navigation
+                int size = nvDrawer.getMenu().size();
+                for (int i = 0; i < size; i++) {
+                    nvDrawer.getMenu().getItem(i).setChecked(false);
+                }
+                
                 mDrawer.closeDrawers();
             }
         });
@@ -154,13 +160,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.home:
                 fragmentClass = AccueilEventsFragment.class;
                 break;
-            case R.id.settings:
+            case R.id.nav_participations:
                 fragmentClass = AccueilEventsFragment.class;
                 break;
-            case R.id.trash:
+            case R.id.nav_evenements:
                 fragmentClass = AccueilEventsFragment.class;
                 break;
-            case R.id.logout:
+            case R.id.nav_amis:
                 fragmentClass = AccueilEventsFragment.class;
                 break;
             default:
