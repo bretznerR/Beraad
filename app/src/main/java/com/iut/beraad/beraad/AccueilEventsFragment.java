@@ -19,7 +19,6 @@ public class AccueilEventsFragment extends Fragment {
     private SortedSet evenements_trie_date;
     private FloatingActionButton fab;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 

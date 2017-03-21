@@ -9,11 +9,13 @@ public class Personne {
     private String nom;
     private String prenom;
     private String email;
+    private String url_img;
 
-    public Personne(String nom, String prenom, String email) {
+    public Personne(String nom, String prenom, String email, String url_img) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
+        this.url_img = url_img;
     }
 
     public String getNom() {
@@ -26,5 +28,9 @@ public class Personne {
 
     public String getEmail() {
         return email;
+    }
+
+    public String getUrl_img() {
+        return url_img;
     }
 }
