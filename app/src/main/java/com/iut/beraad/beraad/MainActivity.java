@@ -1,7 +1,9 @@
 package com.iut.beraad.beraad;
 
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -9,9 +11,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Adrien on 18/03/2017.
@@ -23,26 +30,29 @@ public class MainActivity extends AppCompatActivity {
     private NavigationView nvDrawer;
     private ActionBarDrawerToggle drawerToggle;
 
-    private Personne actual_user;
-    private TextView prenom_nom_actual_user;
+    private TextView navUsername;
+    private TextView navEmail;
+    private CircleImageView navImg;
+    private View headerView;
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Fragment fragment=null;
-        Class fragmentClass = AccueilEventsFragment.class;
-
-        try {
-         fragment = (Fragment) fragmentClass.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+//        Fragment fragment=null;
+//        Class fragmentClass = ProfilFragment.class;
+//
+//        try {
+//         fragment = (Fragment) fragmentClass.newInstance();
+//        } catch (InstantiationException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        }
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
 
         // Set a Toolbar to replace the ActionBar.
@@ -59,15 +69,48 @@ public class MainActivity extends AppCompatActivity {
         nvDrawer = (NavigationView) findViewById(R.id.nvView);
         setupDrawerContent(nvDrawer);
 
-        setActual_user();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nvView);
+        headerView = navigationView.getHeaderView(0);
+        navUsername = (TextView) headerView.findViewById(R.id.tv_prenom_nom);
+        navUsername.setText(PersonneConnecte.getPersonneConnecte().getPrenom()+" "+PersonneConnecte.getPersonneConnecte().getNom());
+        navEmail = (TextView) headerView.findViewById(R.id.tv_email);
+        navEmail.setText(PersonneConnecte.getPersonneConnecte().getEmail());
+
+        navImg = (CircleImageView) headerView.findViewById(R.id.tv_image);
+        Picasso.with(getApplicationContext()).load(PersonneConnecte.getPersonneConnecte().getUrl_img()).centerCrop().fit().into(navImg);
+
+        RelativeLayout relativeLayout = (RelativeLayout) headerView.findViewById(R.id.bloc_header);
+
+        relativeLayout.setBackgroundResource(R.drawable.parisguidetower);
+//        Blurry.with(MainActivity.this).radius(25).sampling(2).onto((ViewGroup) headerView.findViewById(R.id.bloc_header));
+
+        headerView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Fragment fragment = null;
+                Class fragmentClass = ProfilFragment.class;
+                try {
+                    fragment = (Fragment) fragmentClass.newInstance();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+//                Ici on décoche l'item selectionné dans la navigation
+                int size = nvDrawer.getMenu().size();
+                for (int i = 0; i < size; i++) {
+                    nvDrawer.getMenu().getItem(i).setChecked(false);
+                }
+                
+                mDrawer.closeDrawers();
+            }
+        });
+        //setActual_user();
 //        this.prenom_nom_actual_user = (TextView)findViewById(R.id.ho);
 
         //this.prenom_nom_actual_user.setText(this.actual_user.getPrenom()+" "+this.actual_user.getNom());
-    }
-
-    //Temporaire
-    public void setActual_user() {
-        this.actual_user = new Personne("Lemaire","Adrien","exemple@exemple.fr");
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {
@@ -117,13 +160,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.home:
                 fragmentClass = AccueilEventsFragment.class;
                 break;
-            case R.id.settings:
+            case R.id.nav_participations:
                 fragmentClass = AccueilEventsFragment.class;
                 break;
-            case R.id.trash:
+            case R.id.nav_evenements:
                 fragmentClass = AccueilEventsFragment.class;
                 break;
-            case R.id.logout:
+            case R.id.nav_amis:
                 fragmentClass = AccueilEventsFragment.class;
                 break;
             default:
