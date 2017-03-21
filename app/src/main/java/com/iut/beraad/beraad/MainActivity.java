@@ -101,7 +101,10 @@ public class MainActivity extends AppCompatActivity {
                 mDrawer.closeDrawers();
             }
         });
+        //setActual_user();
+//        this.prenom_nom_actual_user = (TextView)findViewById(R.id.ho);
 
+        //this.prenom_nom_actual_user.setText(this.actual_user.getPrenom()+" "+this.actual_user.getNom());
     }
 
     private ActionBarDrawerToggle setupDrawerToggle() {

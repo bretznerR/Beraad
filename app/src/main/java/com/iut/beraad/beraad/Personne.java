@@ -33,4 +33,9 @@ public class Personne {
     public String getUrl_img() {
         return url_img;
     }
+
+    @Override
+    public String toString() {
+        return nom + " " + prenom;
+    }
 }
