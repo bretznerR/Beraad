@@ -7,6 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -29,7 +31,7 @@ public class AccueilEventsFragment extends Fragment {
         this.evenements_trie_date = new TreeSet(new ComparateurParDate());
         ajoutEventActivity = new AjoutEventActivity();
         ajouterEvenements();
-        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_events);
 
         //définit l'agencement des cellules, ici de façon verticale, comme une ListView
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -44,7 +46,14 @@ public class AccueilEventsFragment extends Fragment {
             }
         });
 
+        setHasOptionsMenu(true);
+
         return view;
+    }
+
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_liste_events, menu);
+        super.onCreateOptionsMenu(menu,inflater);
     }
 
     public void ajouterEvenements() {

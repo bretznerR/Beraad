@@ -24,44 +24,44 @@
         android:paddingBottom="0dp"
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
-        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingTop="0dp"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="com.iut.beraad.beraad.AccueilEventsFragment">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
+        <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="50dp">-->
 
-            <Switch
-                android:id="@+id/switch2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true" />
+        <!--<Switch-->
+        <!--android:id="@+id/switch2"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_centerVertical="true" />-->
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@+id/switch2"
-                android:layout_toRightOf="@+id/switch2"
-                android:text="@string/populaire" />
+        <!--<TextView-->
+        <!--android:id="@+id/textView3"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_toEndOf="@+id/switch2"-->
+        <!--android:layout_toRightOf="@+id/switch2"-->
+        <!--android:text="@string/populaire" />-->
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toLeftOf="@+id/switch2"
-                android:layout_toStartOf="@+id/switch2"
-                android:text="@string/avenir"
-                android:textAlignment="textEnd" />
+        <!--<TextView-->
+        <!--android:id="@+id/textView2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_toLeftOf="@+id/switch2"-->
+        <!--android:layout_toStartOf="@+id/switch2"-->
+        <!--android:text="@string/avenir"-->
+        <!--android:textAlignment="textEnd" />-->
 
-        </RelativeLayout>
+        <!--</RelativeLayout>-->
 
         <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/recyclerView"
+            android:id="@+id/recyclerView_events"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

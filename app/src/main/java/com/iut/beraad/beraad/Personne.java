@@ -11,7 +11,7 @@ public class Personne {
     private String email;
     private String url_img;
 
-    public Personne(String nom, String prenom, String email, String url_img) {
+    public Personne(String prenom, String nom, String email, String url_img) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;

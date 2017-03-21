@@ -38,7 +38,7 @@ public class EvenementAdapter extends RecyclerView.Adapter<EvenementViewHolder> 
     //et par la même indiquer la vue à inflater (à partir des layout xml)
     @Override
     public EvenementViewHolder onCreateViewHolder(ViewGroup viewGroup, int itemType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_card,viewGroup,false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.cell_card_event,viewGroup,false);
         return new EvenementViewHolder(view);
     }
 

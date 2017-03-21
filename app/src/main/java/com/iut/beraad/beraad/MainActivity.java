@@ -41,18 +41,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-//        Fragment fragment=null;
-//        Class fragmentClass = ProfilFragment.class;
-//
-//        try {
-//         fragment = (Fragment) fragmentClass.newInstance();
-//        } catch (InstantiationException e) {
-//            e.printStackTrace();
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//        }
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        Fragment fragment=null;
+        Class fragmentClass = AccueilEventsFragment.class;
+
+        try {
+         fragment = (Fragment) fragmentClass.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
 
         // Set a Toolbar to replace the ActionBar.
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
                 for (int i = 0; i < size; i++) {
                     nvDrawer.getMenu().getItem(i).setChecked(false);
                 }
-                
+
                 mDrawer.closeDrawers();
             }
         });
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
                 fragmentClass = AccueilEventsFragment.class;
                 break;
             case R.id.nav_amis:
-                fragmentClass = AccueilEventsFragment.class;
+                fragmentClass = ListeAmisFragment.class;
                 break;
             default:
                 fragmentClass = AccueilEventsFragment.class;
