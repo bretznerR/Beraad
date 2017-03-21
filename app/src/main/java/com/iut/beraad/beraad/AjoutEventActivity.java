@@ -3,12 +3,16 @@ package com.iut.beraad.beraad;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,12 +37,35 @@ import butterknife.InjectView;
 
 public class AjoutEventActivity extends AppCompatActivity {
 
+    @InjectView(R.id.nom_event)
+    EditText nomEvent;
+
+    @InjectView(R.id.description)
+    EditText descriptionEvent;
+
+    @InjectView(R.id.nbPlaceMAX)
+    EditText nbPlaceEvent;
+
     @InjectView(R.id.places_autocomplete)
     PlacesAutocompleteTextView mAutocomplete;
 
+    @InjectView(R.id.datePicker)
+    TextView dateEvent;
+
+    @InjectView(R.id.timePicker)
+    TextView heureEvent;
+
+    @InjectView(R.id.checkBox)
+    CheckBox estPrive;
+
+    @InjectView(R.id.creerEvent)
+    Button creerEvent;
+
     private Toolbar toolbar;
 
-    Adresse adresse;
+    Evenement evenement;
+
+    AccueilEventsFragment accueil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,34 +93,56 @@ public class AjoutEventActivity extends AppCompatActivity {
                 mAutocomplete.getDetailsFor(place, new DetailsCallback() {
                     @Override
                     public void onSuccess(final PlaceDetails details) {
-                        getAdresse(details);
+                        System.out.println("Test -> success");
+                        String[] adr = getAdresse(details);
+                        evenementCree(adr);
                     }
-
                     @Override
                     public void onFailure(final Throwable failure) {
                         System.out.println("Test -> failure" + failure);
-                        Log.d("test", "failure " + failure);
                     }
                 });
             }
         });
+
     }
 
-    public Adresse getAdresse(PlaceDetails details) {
-        adresse = new Adresse(details.address_components.get(0).long_name,
-                details.address_components.get(1).long_name,
-                details.address_components.get(2).long_name,
-                details.address_components.get(6).short_name,
-                details.address_components.get(3).long_name,
-                details.address_components.get(4).long_name,
-                details.address_components.get(5).long_name
-        );
-        System.out.println(adresse.toString());
+
+    public void evenementCree(final String[] adresse) {
+        creerEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent data = new Intent();
+                data.putExtra("nomEvent", nomEvent.getText().toString());
+                data.putExtra("descriptionEvent", descriptionEvent.getText().toString());
+                data.putExtra("nbPlaceEvent", nbPlaceEvent.getText().toString());
+
+                data.putExtra("numeroRue", adresse[0]);
+                data.putExtra("rue", adresse[1]);
+                data.putExtra("ville", adresse[2]);
+                data.putExtra("codePostal", adresse[3]);
+
+                data.putExtra("dateEvent", dateEvent.getText().toString());
+                data.putExtra("heureEvent", heureEvent.getText().toString());
+                data.putExtra("estPrive", Boolean.toString(estPrive.isChecked()));
+
+                setResult(RESULT_OK, data);
+                finish();
+            }
+        });
+    }
+
+    public String[] getAdresse(PlaceDetails details) {
+        String[] adresse = new String[details.address_components.size()];
+        adresse[0] = details.address_components.get(0).long_name;
+        adresse[1] = details.address_components.get(1).long_name;
+        adresse[2] = details.address_components.get(2).long_name;
+        adresse[3] = details.address_components.get(6).short_name;
+        adresse[4] = details.address_components.get(3).long_name;
+        adresse[5] = details.address_components.get(4).long_name;
+        adresse[6] = details.address_components.get(5).long_name;
         return adresse;
-    }
-
-    public Evenement creerEvenement(String titre, String url, int nbParticipants, int nbPlaceMAX, Date date, String description, Adresse adresse, Personne auteur) {
-        return new Evenement(titre, url, nbParticipants, nbPlaceMAX, date, description, adresse, auteur);
     }
 
     public void showDatePickerDialog(View v) {
@@ -105,4 +154,6 @@ public class AjoutEventActivity extends AppCompatActivity {
         DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "timePicker");
     }
+
+
 }

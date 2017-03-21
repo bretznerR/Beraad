@@ -20,4 +20,11 @@ public class DateTest {
     public Date getDate() {
         return date;
     }
+
+    @Override
+    public String toString() {
+        return "DateTest{" +
+                "date=" + date.toString() +
+                '}';
+    }
 }

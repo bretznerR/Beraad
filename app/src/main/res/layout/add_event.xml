@@ -42,6 +42,7 @@
             android:id="@+id/nbPlaceMAX"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:inputType="number"
             android:hint="Nombre place maximum"/>
 
         <com.seatgeek.placesautocomplete.PlacesAutocompleteTextView
@@ -81,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/date_creer_event"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
         </LinearLayout>
 
@@ -112,6 +113,12 @@
                 android:text="@string/date_creer_event"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Privé ?" />
 
         <Button
             android:id="@+id/creerEvent"

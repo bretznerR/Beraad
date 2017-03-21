@@ -9,18 +9,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import java.util.Date;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
 public class AccueilEventsFragment extends Fragment {
 
     private RecyclerView recyclerView;
-    private SortedSet evenements_trie_date;
+    private SortedSet<Evenement> evenements_trie_date;
     private FloatingActionButton fab;
 
-    AjoutEventActivity ajoutEventActivity;
-
+    private final int REQUEST_CODE = 20;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -28,11 +29,8 @@ public class AccueilEventsFragment extends Fragment {
         View view = inflater.inflate(R.layout.content_accueil_events,container,false);
 
         this.evenements_trie_date = new TreeSet(new ComparateurParDate());
-        ajoutEventActivity = new AjoutEventActivity();
         ajouterEvenements();
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
-
-        //définit l'agencement des cellules, ici de façon verticale, comme une ListView
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         recyclerView.setAdapter(new EvenementAdapter(evenements_trie_date));
 
@@ -41,50 +39,123 @@ public class AccueilEventsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(),AjoutEventActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, REQUEST_CODE);
             }
         });
-
         return view;
     }
 
-//Temporaire
-//    private void ajouterEvenements() {
-//
-//        evenements_trie_date.add(new Evenement("Tournois de foot", "http://img4.hostingpics.net/pics/6852211195325unscandaledevasionfiscaleeclabousselefootballitalienwebtete021648790152.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"A l'occasion du 7829eme anniversaire de XXXX, un tournoi de foot a été organisé pour tous les amoureux de foot... Venez nombreux, plein de cadeaux à gagner !!","12 rue de la Paix, Paris","Jean"));
-//        evenements_trie_date.add(new Evenement("GROSSE SOIREE CHEZ RAPHAEL", "http://www.csgo.ca/wp-content/uploads/2016/09/party.jpg", 120, 120, new DateTest(2017, 3, 22).getDate(),"Ramener les bières et des gateaux, je m'occupe du reste ! :p","140 rue de la Nouvelle France, Montreuil","Pierre"));
-//        evenements_trie_date.add(new Evenement("Nouvel an 2046", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 1002, 1007, new DateTest(2017, 05, 1).getDate(),"Fetons le nouvel an ensemble !!!!! ehehehehhe","489 avenue Salvador Allende, Ivry-Sur-Seine","Raphaël"));
-//        evenements_trie_date.add(new Evenement("Madame invite : Rezz, Loge21, Moonbase au Trabendo le 7 avril", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 761, 765, new DateTest(2020, 1, 12).getDate(),"Soirée au Trabendo, organisé par XXXX. Line up : REZZ , Loge21 & guests","56 avenue de la forêt, Paris","Adrien"));
-//        evenements_trie_date.add(new Evenement("GROSSE SOIREE CHEZ RAPHAEL", "http://www.csgo.ca/wp-content/uploads/2016/09/party.jpg", 12, 12, new DateTest(2007, 11, 10).getDate(),"Comme dh'ab vous connaissez les bails à présent :D","31 rue du parc, Bobigny","Benjamin"));
-//        evenements_trie_date.add(new Evenement("Nouvel an 2046", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 45, 80, new DateTest(2017, 3, 23).getDate(),"On est ici dans le turfu : 2046 !!","87 rue du cheval, Fontenay-Sous-Bois", "Alain"));
-//    }
-//
-    public void ajouterEvenements() {
-        evenements_trie_date.add(ajoutEventActivity.creerEvenement("Tournois de foot", "http://img4.hostingpics.net/pics/6852211195325unscandaledevasionfiscaleeclabousselefootballitalienwebtete021648790152.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"A l'occasion du 7829eme anniversaire de XXXX, un tournoi de foot a été organisé pour tous les amoureux de foot... Venez nombreux, plein de cadeaux à gagner !!",
-                new Adresse("17", "allée jean jacques rousseau", "Les Pavillons Sous Bois", "93320", "Seine-Saint-Denis", "Ile-de-France", "France"),
-                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com"))
-        );
-        evenements_trie_date.add(ajoutEventActivity.creerEvenement("GROSSE SOIREE CHEZ RAPHAEL", "http://www.csgo.ca/wp-content/uploads/2016/09/party.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"Ramener les bières et des gateaux, je m'occupe du reste ! :p",
-                new Adresse("140", "rue de la nouvelle france", "Montreuil", "93100", "Seine-Saint-Denis", "Ile-de-France", "France"),
-                new Personne("Adrien", "Lemaire", "alemaire@gmail.com"))
-        );
-        evenements_trie_date.add(ajoutEventActivity.creerEvenement("Nouvel an 2046", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"\"Fetons le nouvel an ensemble !!!!! ehehehehhe",
-                new Adresse("489", "avenue Salvador Allende", "Ivry-Sur-Seine", "92500", "Seine-Saint-Denis", "Ile-de-France", "France"),
-                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com"))
-        );
-        evenements_trie_date.add(ajoutEventActivity.creerEvenement("Madame invite : Rezz, Loge21, Moonbase au Trabendo le 7 avril", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"Soirée au Trabendo, organisé par XXXX. Line up : REZZ , Loge21 & guests",
-                new Adresse("56", "avenue de la forêt", "Paris", "75005", "Seine-Saint-Denis", "Ile-de-France", "France"),
-                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com"))
-        );
-        evenements_trie_date.add(ajoutEventActivity.creerEvenement("GROSSE SOIREE CHEZ RAPHAEL", "http://www.csgo.ca/wp-content/uploads/2016/09/party.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"Ramener les bières et des gateaux, je m'occupe du reste ! :p",
-                new Adresse("140", "rue de la nouvelle france", "Montreuil", "93100", "Seine-Saint-Denis", "Ile-de-France", "France"),
-                new Personne("Adrien", "Lemaire", "alemaire@gmail.com"))
-        );
-        evenements_trie_date.add(ajoutEventActivity.creerEvenement("Nouvel an 2046", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"\"Fetons le nouvel an ensemble !!!!! ehehehehhe",
-                new Adresse("489", "avenue Salvador Allende", "Ivry-Sur-Seine", "92500", "Seine-Saint-Denis", "Ile-de-France", "France"),
-                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com"))
-        );
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // REQUEST_CODE est défini en attribut
+        if (requestCode == REQUEST_CODE) {
 
+            String nomEvent = data.getExtras().getString("nomEvent");
+            String descriptionEvent = data.getExtras().getString("descriptionEvent");
+            String nbPlaceEvent = data.getExtras().getString("nbPlaceEvent");
+            String dateEvent = data.getExtras().getString("dateEvent");
+            String heureEvent = data.getExtras().getString("heureEvent");
+            String estPrive = data.getExtras().getString("estPrive");
+
+            String numeroRue = data.getExtras().getString("numeroRue");
+            String rue = data.getExtras().getString("rue");
+            String ville = data.getExtras().getString("ville");
+            String codePostal = data.getExtras().getString("codePostal");
+
+            String jour = dateEvent.substring(3, 5);
+            String mois = dateEvent.substring(6, 10);
+            String annee = dateEvent.substring(11, dateEvent.length());
+
+            Date date = new DateTest(Integer.parseInt(annee), moisToInt(mois), Integer.parseInt(jour)).getDate();
+            Adresse adresse = new Adresse(numeroRue, rue, ville, codePostal);
+
+            Personne p = new Personne("BRETZNER", "Raphaël", "rbretzner@gmail.com");
+            Evenement evenement = new Evenement(nomEvent, "", 0,
+                    Integer.valueOf(nbPlaceEvent), date,
+                    descriptionEvent, adresse, p, Boolean.valueOf(estPrive));
+
+            ajouterEvenement(evenement);
+        }
     }
 
+    public void ajouterEvenements() {
+
+        evenements_trie_date.add(new Evenement("Tournois de foot", "http://img4.hostingpics.net/pics/6852211195325unscandaledevasionfiscaleeclabousselefootballitalienwebtete021648790152.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"A l'occasion du 7829eme anniversaire de XXXX, un tournoi de foot a été organisé pour tous les amoureux de foot... Venez nombreux, plein de cadeaux à gagner !!",
+                new Adresse("17", "allée jean jacques rousseau", "Les Pavillons Sous Bois", "93320"),
+                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com"), false)
+        );
+        evenements_trie_date.add(new Evenement("GROSSE SOIREE CHEZ RAPHAEL", "http://www.csgo.ca/wp-content/uploads/2016/09/party.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"Ramener les bières et des gateaux, je m'occupe du reste ! :p",
+                new Adresse("140", "rue de la nouvelle france", "Montreuil", "93100"),
+                new Personne("Adrien", "Lemaire", "alemaire@gmail.com"), false)
+        );
+        evenements_trie_date.add(new Evenement("Nouvel an 2046", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 31, 37, new DateTest(2017, 03, 28).getDate(),"\"Fetons le nouvel an ensemble !!!!! ehehehehhe",
+                new Adresse("489", "avenue Salvador Allende", "Ivry-Sur-Seine", "92500"),
+                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com"), false)
+        );
+        evenements_trie_date.add(new Evenement("Madame invite : Rezz, Loge21, Moonbase au Trabendo le 7 avril", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 31, 37, new DateTest(2017, 11, 12).getDate(),"Soirée au Trabendo, organisé par XXXX. Line up : REZZ , Loge21 & guests",
+                new Adresse("56", "avenue de la forêt", "Paris", "75005"),
+                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com"), false)
+        );
+        evenements_trie_date.add(new Evenement("GROSSE SOIREE CHEZ RAPHAEL", "http://www.csgo.ca/wp-content/uploads/2016/09/party.jpg", 31, 37, new DateTest(2017, 06, 12).getDate(),"Ramener les bières et des gateaux, je m'occupe du reste ! :p",
+                new Adresse("140", "rue de la nouvelle france", "Montreuil", "93100"),
+                new Personne("Adrien", "Lemaire", "alemaire@gmail.com"), false)
+        );
+        evenements_trie_date.add(new Evenement("Nouvel an 2046", "http://www.iedrs.com/wp-content/uploads/2017/02/4-paris-moyan-brenn-2.jpg", 31, 37, new DateTest(2017, 07, 12).getDate(),"\"Fetons le nouvel an ensemble !!!!! ehehehehhe",
+                new Adresse("489", "avenue Salvador Allende", "Ivry-Sur-Seine", "92500"),
+                new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com"), false)
+        );
+    }
+
+    public void ajouterEvenement(Evenement e) {
+        evenements_trie_date.add(e);
+        for (Evenement evenement : evenements_trie_date) {
+            System.out.println("bouble des évènements " + evenement.toString());
+        }
+    }
+
+    public int moisToInt(String s) {
+        int mois;
+        switch (s) {
+            case "Janvier":
+                mois = 0;
+                break;
+            case "Février":
+                mois = 1;
+                break;
+            case "Mars":
+                mois = 2;
+                break;
+            case "Avril":
+                mois = 3;
+                break;
+            case "Mai":
+                mois = 4;
+                break;
+            case "Juin":
+                mois = 5;
+                break;
+            case "Juillet":
+                mois = 6;
+                break;
+            case "Août":
+                mois = 7;
+                break;
+            case "Septembre":
+                mois = 8;
+                break;
+            case "Octobre":
+                mois = 9;
+                break;
+            case "Novembre":
+                mois = 10;
+                break;
+            case "Décembre":
+                mois = 11;
+                break;
+            default:
+                mois = -1;
+                break;
+        }
+        return mois;
+    }
 }
