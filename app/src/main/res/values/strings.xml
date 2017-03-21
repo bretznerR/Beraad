@@ -19,7 +19,15 @@
     <string name="auteur_event">par Adrien Lemaire</string>
 
     <string name="google_maps_api_key">AIzaSyBu3SDK9aCGEkxDS5yyX6jT81jpkRkxeKA</string>
+
     <string name="modifier_profil">Modifier</string>
     <string name="nom_prenom_profil">Nom Prenom</string>
     <string name="email_profil">adresse@email.com</string>
+
+
+    <string name="pick_date">Pick Date</string>
+    <string name="date_creer_event">Votre date</string>
+    <string name="pick_time">Pick Time</string>
+    <string name="creer_event">Créer</string>
+
 </resources>
