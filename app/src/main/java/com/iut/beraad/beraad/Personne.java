@@ -15,6 +15,7 @@ public class Personne {
     private String url_img;
 
     private SortedSet<Personne> listeAmis;
+    private SortedSet<Evenement> listeEvenements;
 
 
     public Personne(String prenom, String nom, String email, String url_img) {
@@ -23,6 +24,7 @@ public class Personne {
         this.email = email;
         this.url_img = url_img;
         this.listeAmis = new TreeSet<>();
+        this.listeEvenements = new TreeSet(new ComparateurParDate());
     }
 
     public SortedSet<Personne> getListeAmis() {
@@ -51,6 +53,14 @@ public class Personne {
 
     public String getUrl_img() {
         return url_img;
+    }
+
+    public SortedSet<Evenement> getListeEvenements() {
+        return listeEvenements;
+    }
+
+    public void ajouterEvenement(Evenement e) {
+        this.listeEvenements.add(e);
     }
 
     @Override

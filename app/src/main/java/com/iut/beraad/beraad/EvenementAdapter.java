@@ -34,6 +34,14 @@ public class EvenementAdapter extends RecyclerView.Adapter<EvenementViewHolder> 
         }
     }
 
+    public void ajouterEvenement(Evenement evenement) {
+        this.list.add(evenement);
+    }
+
+    public List<Evenement> getEvenements() {
+        return this.list;
+    }
+
     //cette fonction permet de créer les viewHolder
     //et par la même indiquer la vue à inflater (à partir des layout xml)
     @Override

@@ -63,7 +63,6 @@ public class AjoutEventActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
-    AjoutEventAdapter ajoutEventAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

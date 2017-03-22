@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -22,12 +24,13 @@ public class DetailsEventActivity extends AppCompatActivity {
     private TextView nom_event , adresse_event, date_event, heure_event, description_event, auteur_event;
     private ImageView image_event;
     private Toolbar toolbar;
+    private Button button_event;
+    private PersonneConnecte personneConnecte;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_details_event);
-
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -42,6 +45,8 @@ public class DetailsEventActivity extends AppCompatActivity {
             }
         });
 
+        personneConnecte = new PersonneConnecte();
+
         nom_event = (TextView) findViewById(R.id.nom_event);
         adresse_event = (TextView) findViewById(R.id.adresse_event);
         date_event = (TextView) findViewById(R.id.date_event);
@@ -49,6 +54,7 @@ public class DetailsEventActivity extends AppCompatActivity {
         description_event = (TextView) findViewById(R.id.description_event);
         auteur_event = (TextView) findViewById(R.id.auteur_event);
         image_event = (ImageView) findViewById(R.id.image_event);
+        button_event = (Button) findViewById(R.id.button);
 
         Intent myIntent = getIntent();
         viewOnMap();
@@ -61,6 +67,8 @@ public class DetailsEventActivity extends AppCompatActivity {
         //this.image_event.setImageResource();
         Picasso.with(image_event.getContext()).load((myIntent.getStringExtra("image_event"))).centerCrop().fit().into(image_event);
         //Picasso.with(imageView.getContext()).load(evenement.getImageUrl()).centerCrop().fit().into(imageView);
+
+        particperEvenement();
     }
 
     public void viewOnMap() {
@@ -73,5 +81,15 @@ public class DetailsEventActivity extends AppCompatActivity {
                 startActivity(addressIntent);
             }
         });
+    }
+
+    public void particperEvenement() {
+        button_event.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //personneConnecte.ajouterEvenement();
+            }
+        });
+
     }
 }

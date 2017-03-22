@@ -2,6 +2,7 @@ package com.iut.beraad.beraad;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,11 +12,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,13 +33,13 @@ public class AccueilEventsFragment extends Fragment {
     private SortedSet<Evenement> evenements_trie_date;
     private FloatingActionButton fab;
     EvenementAdapter evenementAdapter;
-
+    View view;
     private final int REQUEST_CODE = 20;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.content_accueil_events,container,false);
+        view = inflater.inflate(R.layout.content_accueil_events,container,false);
         this.evenements_trie_date = new TreeSet(new ComparateurParDate());
 
         ajouterEvenements();
@@ -68,7 +71,6 @@ public class AccueilEventsFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // REQUEST_CODE est défini en attribut
         if (requestCode == REQUEST_CODE) {
 
             String nomEvent = data.getExtras().getString("nomEvent");
@@ -95,8 +97,8 @@ public class AccueilEventsFragment extends Fragment {
                     Integer.valueOf(nbPlaceEvent), date,
                     descriptionEvent, adresse, p, Boolean.valueOf(estPrive));
 
-            ajouterEvenement(evenement);
-            evenementAdapter.notifyItemRangeChanged(0, evenements_trie_date.size());
+            evenementAdapter.ajouterEvenement(evenement);
+
             for (Evenement e : evenements_trie_date) {
                 System.out.println("bouble des évènements " + e.toString());
             }
