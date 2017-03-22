@@ -14,14 +14,11 @@ public class Adresse {
     private String region;
     private String pays;
 
-    public Adresse(String numero, String rue, String ville, String codePostal, String departement, String region, String pays) {
+    public Adresse(String numero, String rue, String ville, String codePostal) {
         this.numero = numero;
         this.rue = rue;
         this.ville = ville;
         this.codePostal = codePostal;
-        this.departement = departement;
-        this.region = region;
-        this.pays = pays;
     }
 
     public String getNumero() {

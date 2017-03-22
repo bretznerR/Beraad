@@ -4,25 +4,29 @@ import java.util.Date;
 
 /**
  * Created by Adrien on 13/03/2017.
+ * Modified by raphaelbretzner
  */
 
 public class Evenement {
 
     private String imageUrl;
+
     private String titre;
-    private Date date;
-    // A rajouter : Heure
     private String description;
+    private Adresse adresse;
+    private Date date;
+    private String heure;
+
+
     private int nbPlaceMAX;
     private int nbParticipants;
+
     private boolean placeEstLimite;
     private boolean estPrivee;
-    // A rajouter : Géolocalisation Google
-    private Adresse adresse;
-    private String heure;
+
     private Personne auteur;
 
-    public Evenement(String titre, String url, int nbParticipants, int nbPlaceMAX, Date date, String description,Adresse adresse, Personne auteur) {
+    public Evenement(String titre, String url, int nbParticipants, int nbPlaceMAX, Date date, String description,Adresse adresse, Personne auteur, boolean isprive) {
         this.titre = titre;
         this.imageUrl = url;
         this.nbParticipants = nbParticipants;
@@ -132,5 +136,16 @@ public class Evenement {
             break;
         }
         return mois;
+    }
+
+    @Override
+    public String toString() {
+        return "Evenement{" +
+                "titre='" + titre + '\'' +
+                ", date=" + date +
+                ", description='" + description + '\'' +
+                ", nbPlaceMAX=" + nbPlaceMAX +
+                ", adresse=" + adresse +
+                '}';
     }
 }
