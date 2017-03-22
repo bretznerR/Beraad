@@ -20,7 +20,6 @@ public class AjoutEventAdapter extends AbstractPlacesAutocompleteAdapter {
 
     public AjoutEventAdapter(final Context context, final PlacesApi api, final AutocompleteResultType resultType, final AutocompleteHistoryManager history) {
         super(context, api, resultType, history);
-        notifyDataSetChanged();
     }
 
     @Override

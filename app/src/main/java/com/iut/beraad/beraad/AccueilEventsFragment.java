@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,15 +17,19 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.logging.Handler;
 
 public class AccueilEventsFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private SortedSet<Evenement> evenements_trie_date;
     private FloatingActionButton fab;
+    EvenementAdapter evenementAdapter;
 
     private final int REQUEST_CODE = 20;
 
@@ -33,16 +38,15 @@ public class AccueilEventsFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.content_accueil_events,container,false);
         this.evenements_trie_date = new TreeSet(new ComparateurParDate());
+
         ajouterEvenements();
 
+        evenementAdapter = new EvenementAdapter(evenements_trie_date);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_events);
 
-        //définit l'agencement des cellules, ici de façon verticale, comme une ListView
-
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_events);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        recyclerView.setAdapter(new EvenementAdapter(evenements_trie_date));
+        recyclerView.setAdapter(evenementAdapter);
 
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -92,8 +96,9 @@ public class AccueilEventsFragment extends Fragment {
                     descriptionEvent, adresse, p, Boolean.valueOf(estPrive));
 
             ajouterEvenement(evenement);
+            evenementAdapter.notifyItemRangeChanged(0, evenements_trie_date.size());
             for (Evenement e : evenements_trie_date) {
-                System.out.println("bouble 2 des évènements " + e.toString());
+                System.out.println("bouble des évènements " + e.toString());
             }
         }
     }
@@ -129,9 +134,6 @@ public class AccueilEventsFragment extends Fragment {
 
     public void ajouterEvenement(Evenement e) {
         evenements_trie_date.add(e);
-        for (Evenement evenement : evenements_trie_date) {
-            System.out.println("bouble des évènements " + evenement.toString());
-        }
     }
 
     public int moisToInt(String s) {

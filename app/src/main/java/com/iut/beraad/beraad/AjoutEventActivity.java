@@ -63,10 +63,7 @@ public class AjoutEventActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
-    Evenement evenement;
-
-    AccueilEventsFragment accueil;
-
+    AjoutEventAdapter ajoutEventAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -129,6 +126,7 @@ public class AjoutEventActivity extends AppCompatActivity {
 
                 setResult(RESULT_OK, data);
                 finish();
+
             }
         });
     }
