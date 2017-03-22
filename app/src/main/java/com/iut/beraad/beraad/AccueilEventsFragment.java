@@ -1,9 +1,13 @@
 package com.iut.beraad.beraad;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -49,7 +53,6 @@ public class AccueilEventsFragment extends Fragment {
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
-
         setHasOptionsMenu(true);
 
         return view;
@@ -58,7 +61,6 @@ public class AccueilEventsFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_liste_events, menu);
         super.onCreateOptionsMenu(menu,inflater);
-        return view;
     }
 
     @Override
@@ -91,6 +93,9 @@ public class AccueilEventsFragment extends Fragment {
                     descriptionEvent, adresse, p, Boolean.valueOf(estPrive));
 
             ajouterEvenement(evenement);
+            for (Evenement e : evenements_trie_date) {
+                System.out.println("bouble 2 des évènements " + e.toString());
+            }
         }
     }
 

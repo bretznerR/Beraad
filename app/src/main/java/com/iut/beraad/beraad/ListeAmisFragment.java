@@ -43,7 +43,7 @@ public class ListeAmisFragment extends Fragment{
 
         this.ami_cherche_ami = (EditText) view.findViewById(R.id.ami_cherche_ami);
         this.ami_bloc_cherche = (LinearLayout) view.findViewById(R.id.ami_bloc_cherche);
-
+        
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,5 +80,9 @@ public class ListeAmisFragment extends Fragment{
         this.amis_trie_alphabetique.add(new Personne("Marco","Veratti","mveratti@gmail.com","https://pbs.twimg.com/profile_images/627117609444581380/7YG7kxA4.png"));
         this.amis_trie_alphabetique.add(new Personne("Daryl","Dickson","ddickson@gmail.com","https://pbs.twimg.com/profile_images/627117609444581380/7YG7kxA4.png"));
         this.amis_trie_alphabetique.add(new Personne("Zlatan","Ibrahimovic","zibrahimovic@gmail.com","https://pbs.twimg.com/profile_images/627117609444581380/7YG7kxA4.png"));
+    }
+
+    public void supprimerAmis(Personne e) {
+        this.amis_trie_alphabetique.remove(e);
     }
 }
