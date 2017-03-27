@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,14 +31,14 @@ public class LoginActivity extends AppCompatActivity {
     private LoginButton loginButton;
     private TextView btnLogin;
     private ProgressDialog progressDialog;
-    User user;
+    Personne user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        if(PrefUtils.getCurrentUser(LoginActivity.this) != null){
+        if (PrefUtils.getCurrentUser(LoginActivity.this) != null) {
 
             Intent homeIntent = new Intent(LoginActivity.this, LogoutActivity.class);
 
@@ -54,13 +53,13 @@ public class LoginActivity extends AppCompatActivity {
         super.onResume();
 
 
-        callbackManager=CallbackManager.Factory.create();
+        callbackManager = CallbackManager.Factory.create();
 
-        loginButton= (LoginButton)findViewById(R.id.login_button);
+        loginButton = (LoginButton) findViewById(R.id.login_button);
 
-        loginButton.setReadPermissions("public_profile", "email","user_friends");
+        loginButton.setReadPermissions("public_profile", "email", "user_friends");
 
-        btnLogin= (TextView) findViewById(R.id.btnLogin);
+        btnLogin = (TextView) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,20 +106,22 @@ public class LoginActivity extends AppCompatActivity {
                                 JSONObject object,
                                 GraphResponse response) {
 
-                            Log.e("response: ", response + "");
+                            System.out.println("response: " + response + "");
                             try {
-                                user = new User();
+                                user = new Personne(object.getString("firstname").toString(),
+                                        object.getString("name").toString(),
+                                        object.getString("email").toString(),
+                                        ""
+                                        );
                                 user.facebookID = object.getString("id").toString();
-                                user.email = object.getString("email").toString();
-                                user.name = object.getString("name").toString();
                                 user.gender = object.getString("gender").toString();
-                                PrefUtils.setCurrentUser(user,LoginActivity.this);
+                                PrefUtils.setCurrentUser(user, LoginActivity.this);
 
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                            Toast.makeText(LoginActivity.this,"welcome "+user.name,Toast.LENGTH_LONG).show();
-                            Intent intent=new Intent(LoginActivity.this,LogoutActivity.class);
+                            Toast.makeText(LoginActivity.this, "welcome " + user.getNom(), Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(LoginActivity.this, LogoutActivity.class);
                             startActivity(intent);
                             finish();
 
@@ -144,6 +145,4 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.dismiss();
         }
     };
-
-}
 }

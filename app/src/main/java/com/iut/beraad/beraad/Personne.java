@@ -58,6 +58,22 @@ public class Personne {
         return url_img;
     }
 
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom = prenom;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setUrl_img(String url_img) {
+        this.url_img = url_img;
+    }
+
     public SortedSet<Evenement> getListeEvenements() {
         return listeEvenements;
     }
