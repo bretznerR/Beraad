@@ -14,6 +14,9 @@ public class Personne {
     private String email;
     private String url_img;
 
+    public String facebookID;
+    public String gender;
+
     private SortedSet<Personne> listeAmis;
     private SortedSet<Evenement> listeEvenements;
 

@@ -30,4 +30,8 @@
     <string name="pick_time">Pick Time</string>
     <string name="creer_event">Créer</string>
 
+    <string name="facebook_app_id">1116862081775065</string>
+
+    <string name="title_activity_logout">LogoutActivity</string>
+
 </resources>
