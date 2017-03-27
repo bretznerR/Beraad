@@ -21,6 +21,12 @@ public class DateTest {
         return date;
     }
 
+    public static Date makeDateFromString(String dateString) {
+        String[] parts = dateString.split("-");
+        DateTest dt = new DateTest(Integer.parseInt(parts[0]),Integer.parseInt(parts[1]),Integer.parseInt(parts[2]));
+        return dt.getDate();
+    }
+
     @Override
     public String toString() {
         return "DateTest{" +

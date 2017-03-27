@@ -1,21 +1,26 @@
 package com.iut.beraad.beraad;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Date;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -25,6 +30,7 @@ public class AccueilEventsFragment extends Fragment {
     private RecyclerView recyclerView;
     private SortedSet<Evenement> evenements_trie_date;
     private FloatingActionButton fab;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private final int REQUEST_CODE = 20;
 
@@ -34,6 +40,7 @@ public class AccueilEventsFragment extends Fragment {
         View view = inflater.inflate(R.layout.content_accueil_events,container,false);
         this.evenements_trie_date = new TreeSet(new ComparateurParDate());
         ajouterEvenements();
+        //getPersonnesFromJSON();
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_events);
 
@@ -54,6 +61,67 @@ public class AccueilEventsFragment extends Fragment {
         });
         setHasOptionsMenu(true);
 
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+
+            @Override
+            public void onRefresh() {
+                refreshItems();
+            }
+
+            private void refreshItems() {
+                new Thread() {
+                    @Override
+                    public void run() {
+                        System.out.println("hey?");
+                        try {
+                            String myurl= "http://adrien.pre-prod.space/Beraad/index.php?module=evenement&action=resultat_allEvents";
+                            URL url = new URL(myurl);
+                            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                            connection.connect();
+                            InputStream inputStream = connection.getInputStream();
+                            String result = InputStreamOperations.InputStreamToString(inputStream);
+                            // On récupère le tableau d'objets qui nous concerne
+                            JSONArray array = new JSONArray(result);
+                            evenements_trie_date.clear();
+                            for (int i=0; i<array.length(); i++) {
+                                System.out.println("ok"+i);
+                                // On récupère un objet JSON du tableau
+                                JSONObject obj = new JSONObject(array.getString(i));
+                                // On fait le lien Personne - Objet JSON
+                                evenements_trie_date.add(new Evenement(
+                                        obj.getString("nomEvent"),
+                                        obj.getString("image"),
+                                        Integer.parseInt(obj.getString("nbParticipants")),
+                                        Integer.parseInt(obj.getString("capacite")),
+                                        DateTest.makeDateFromString(obj.getString("dateEvent")),
+                                        obj.getString("description"),
+                                        new Adresse("140","rue de la Nouvelle France","Montreuil","93100"),
+                                        new Personne("Adrien","Lemaire","adrien@gmail.com","https://pbs.twimg.com/profile_images/627117609444581380/7YG7kxA4.png"),
+                                        false));
+                            }
+                            Log.d("!!!!!!!!","OK");
+                        } catch (Exception e) {
+                            Log.d("!!!!!!!!!!!!!!!!!","Exception lancé");
+                            e.printStackTrace();
+                        }
+                    }
+                }.start();
+                recyclerView.setAdapter(new EvenementAdapter(evenements_trie_date));
+                onItemsLoadComplete();
+            }
+
+            private void onItemsLoadComplete() {
+                Toast.makeText(getActivity(), "done",
+                        Toast.LENGTH_SHORT).show();
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+
+        });
+
+
+
+        System.out.println(evenements_trie_date);
         return view;
     }
 
@@ -179,4 +247,44 @@ public class AccueilEventsFragment extends Fragment {
         }
         return mois;
     }
+
+
+    public void getPersonnesFromJSON() {
+        try {
+            String myurl= "http://adrien.pre-prod.space/Beraad/index.php?module=evenement&action=resultat_allEvents";
+            URL url = new URL(myurl);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.connect();
+//            InputStream inputStream = connection.getInputStream();
+//            String result = InputStreamOperations.InputStreamToString(inputStream);
+//            // On récupère le JSON complet
+//            JSONObject jsonObject = new JSONObject(result);
+//            // On récupère le tableau d'objets qui nous concernent
+//            JSONArray array = new JSONArray(jsonObject.getString("evenement"));
+//            Log.d("!!!!!!!!!!!!!!!!!","no");
+//            for (int i=0; i<array.length(); i++) {
+//                Log.d("!!!!!!!!!!!!!!!!!","hey");
+//                // On récupère un objet JSON du tableau
+//                JSONObject obj = new JSONObject(array.getString(i));
+//                // On fait le lien Personne - Objet JSON
+//                this.evenements_trie_date.add(new Evenement(
+//                        obj.getString("nomEvent"),
+//                        obj.getString("image"),
+//                        Integer.parseInt(obj.getString("nbParticipants")),
+//                        Integer.parseInt(obj.getString("capacite")),
+//                        DateTest.makeDateFromString(obj.getString("date")),
+//                        obj.getString("description"),
+//                        new Adresse("140","rue de la Nouvelle France","Montreuil","93100"),
+//                        new Personne("Adrien","Lemaire","adrien@gmail.com","https://pbs.twimg.com/profile_images/627117609444581380/7YG7kxA4.png"),
+//                        false));
+//
+//            }
+
+        } catch (Exception e) {
+            Log.d("!!!!!!!!!!!!!!!!!","Exception lancé");
+            e.printStackTrace();
+        }
+
+    }
+
 }

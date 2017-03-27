@@ -26,7 +26,7 @@ public class Evenement {
 
     private Personne auteur;
 
-    public Evenement(String titre, String url, int nbParticipants, int nbPlaceMAX, Date date, String description,Adresse adresse, Personne auteur, boolean isprive) {
+    public Evenement(String titre, String url, int nbParticipants, int nbPlaceMAX, Date date, String description, Adresse adresse, Personne auteur, boolean isprive) {
         this.titre = titre;
         this.imageUrl = url;
         this.nbParticipants = nbParticipants;

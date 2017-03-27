@@ -36,23 +36,27 @@
             android:layout_weight="1" />
 
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             tools:ignore="UseCompoundDrawables">
 
             <ImageView
+                android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_place"
-                android:id="@+id/imageView3" />
+                app:srcCompat="@drawable/ic_place" />
 
             <TextView
-                android:text="@string/lieu_event"
+                android:id="@+id/adresse_event"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/adresse_event" />
+                android:background="@color/colorIsClose"
+                android:gravity="center"
+                android:text="@string/lieu_event"
+                android:textAlignment="textStart" />
 
         </LinearLayout>
 
@@ -60,7 +64,8 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical">
 
             <ImageView
                 android:layout_width="wrap_content"
