@@ -28,37 +28,7 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="com.iut.beraad.beraad.AccueilEventsFragment">
 
-        <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="50dp">-->
 
-        <!--<Switch-->
-        <!--android:id="@+id/switch2"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:layout_centerVertical="true" />-->
-
-        <!--<TextView-->
-        <!--android:id="@+id/textView3"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_toEndOf="@+id/switch2"-->
-        <!--android:layout_toRightOf="@+id/switch2"-->
-        <!--android:text="@string/populaire" />-->
-
-        <!--<TextView-->
-        <!--android:id="@+id/textView2"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerVertical="true"-->
-        <!--android:layout_toLeftOf="@+id/switch2"-->
-        <!--android:layout_toStartOf="@+id/switch2"-->
-        <!--android:text="@string/avenir"-->
-        <!--android:textAlignment="textEnd" />-->
-
-        <!--</RelativeLayout>-->
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
@@ -69,8 +39,16 @@
 
         <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/recyclerView_events"
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/recyclerView_events"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </android.support.v4.widget.SwipeRefreshLayout>
 
         </android.support.v4.widget.SwipeRefreshLayout>
 

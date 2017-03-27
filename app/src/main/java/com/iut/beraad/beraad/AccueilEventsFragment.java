@@ -5,6 +5,14 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,9 +29,12 @@ import org.json.JSONObject;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.logging.Handler;
 
 public class AccueilEventsFragment extends Fragment {
 
@@ -32,24 +43,25 @@ public class AccueilEventsFragment extends Fragment {
     private FloatingActionButton fab;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
+    EvenementAdapter evenementAdapter;
+    View view;
     private final int REQUEST_CODE = 20;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.content_accueil_events,container,false);
+        view = inflater.inflate(R.layout.content_accueil_events,container,false);
         this.evenements_trie_date = new TreeSet(new ComparateurParDate());
+
         ajouterEvenements();
         //getPersonnesFromJSON();
 
+        evenementAdapter = new EvenementAdapter(evenements_trie_date);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_events);
 
-        //définit l'agencement des cellules, ici de façon verticale, comme une ListView
-
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_events);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        recyclerView.setAdapter(new EvenementAdapter(evenements_trie_date));
+        recyclerView.setAdapter(evenementAdapter);
 
         fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -132,7 +144,6 @@ public class AccueilEventsFragment extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // REQUEST_CODE est défini en attribut
         if (requestCode == REQUEST_CODE) {
 
             String nomEvent = data.getExtras().getString("nomEvent");
@@ -159,9 +170,10 @@ public class AccueilEventsFragment extends Fragment {
                     Integer.valueOf(nbPlaceEvent), date,
                     descriptionEvent, adresse, p, Boolean.valueOf(estPrive));
 
-            ajouterEvenement(evenement);
+            evenementAdapter.ajouterEvenement(evenement);
+
             for (Evenement e : evenements_trie_date) {
-                System.out.println("bouble 2 des évènements " + e.toString());
+                System.out.println("bouble des évènements " + e.toString());
             }
         }
     }
@@ -197,9 +209,6 @@ public class AccueilEventsFragment extends Fragment {
 
     public void ajouterEvenement(Evenement e) {
         evenements_trie_date.add(e);
-        for (Evenement evenement : evenements_trie_date) {
-            System.out.println("bouble des évènements " + evenement.toString());
-        }
     }
 
     public int moisToInt(String s) {
