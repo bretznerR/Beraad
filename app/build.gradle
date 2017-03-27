@@ -20,6 +20,7 @@ android {
 }
 repositories {
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    mavenCentral()
 }
 
 dependencies {
@@ -40,4 +41,6 @@ dependencies {
     compile 'com.seatgeek:placesautocomplete:0.2-SNAPSHOT'
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'jp.wasabeef:blurry:2.1.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.1.0'
+    compile 'com.google.code.gson:gson:2.3.1'
 }
