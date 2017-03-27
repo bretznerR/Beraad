@@ -26,7 +26,7 @@ import java.net.URL;
 public class LogoutActivity extends AppCompatActivity{
 
     private TextView btnLogout;
-    private User user;
+    private Personne user;
     private ImageView profileImage;
     Bitmap bitmap;
     @Override
