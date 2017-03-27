@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -45,7 +44,7 @@ public class DetailsEventActivity extends AppCompatActivity {
             }
         });
 
-        personneConnecte = new PersonneConnecte();
+        //personneConnecte = new PersonneConnecte();
 
         nom_event = (TextView) findViewById(R.id.nom_event);
         adresse_event = (TextView) findViewById(R.id.adresse_event);

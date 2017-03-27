@@ -5,14 +5,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -29,12 +21,9 @@ import org.json.JSONObject;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import java.util.logging.Handler;
 
 public class AccueilEventsFragment extends Fragment {
 
@@ -87,7 +76,8 @@ public class AccueilEventsFragment extends Fragment {
                     public void run() {
                         System.out.println("hey?");
                         try {
-                            String myurl= "http://adrien.pre-prod.space/Beraad/index.php?module=evenement&action=resultat_allEvents";
+//                            String myurl= "http://adrien.pre-prod.space/Beraad/index.php?module=evenement&action=resultat_allEvents";
+                            String myurl= "http://pageperso.iut.univ-paris8.fr/~alemaire/Beraad/index.php?module=evenement&action=resultat_allEvents";
                             URL url = new URL(myurl);
                             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                             connection.connect();
@@ -95,7 +85,9 @@ public class AccueilEventsFragment extends Fragment {
                             String result = InputStreamOperations.InputStreamToString(inputStream);
                             // On récupère le tableau d'objets qui nous concerne
                             JSONArray array = new JSONArray(result);
+                            System.out.println("suppression en approche");
                             evenements_trie_date.clear();
+                            System.out.println("suppression faite");
                             for (int i=0; i<array.length(); i++) {
                                 System.out.println("ok"+i);
                                 // On récupère un objet JSON du tableau
@@ -108,7 +100,7 @@ public class AccueilEventsFragment extends Fragment {
                                         Integer.parseInt(obj.getString("capacite")),
                                         DateTest.makeDateFromString(obj.getString("dateEvent")),
                                         obj.getString("description"),
-                                        new Adresse("140","rue de la Nouvelle France","Montreuil","93100"),
+                                        new Adresse(obj.getString("numero"),obj.getString("rue"),obj.getString("ville"),obj.getString("codePostal")),
                                         new Personne("Adrien","Lemaire","adrien@gmail.com","https://pbs.twimg.com/profile_images/627117609444581380/7YG7kxA4.png"),
                                         false));
                             }
