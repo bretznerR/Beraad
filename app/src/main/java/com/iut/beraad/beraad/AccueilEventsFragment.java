@@ -36,6 +36,9 @@ public class AccueilEventsFragment extends Fragment {
     EvenementAdapter evenementAdapter;
     View view;
     private final int REQUEST_CODE = 20;
+    private URL url;
+    private HttpURLConnection connection;
+    private String myurl;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -78,9 +81,9 @@ public class AccueilEventsFragment extends Fragment {
                         System.out.println("hey?");
                         try {
 //                            String myurl= "http://adrien.pre-prod.space/Beraad/index.php?module=evenement&action=resultat_allEvents";
-                            String myurl= "http://pageperso.iut.univ-paris8.fr/~alemaire/Beraad/index.php?module=evenement&action=resultat_allEvents";
-                            URL url = new URL(myurl);
-                            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                            myurl= "http://pageperso.iut.univ-paris8.fr/~alemaire/Beraad/index.php?module=evenement&action=resultat_allEvents";
+                            url = new URL(myurl);
+                            connection = (HttpURLConnection) url.openConnection();
                             connection.connect();
                             InputStream inputStream = connection.getInputStream();
                             String result = InputStreamOperations.InputStreamToString(inputStream);
@@ -103,9 +106,9 @@ public class AccueilEventsFragment extends Fragment {
                                         new Personne("Adrien","Lemaire","adrien@gmail.com","https://pbs.twimg.com/profile_images/627117609444581380/7YG7kxA4.png"),
                                         false));
                             }
-                            Log.d("!!!!!!!!","OK");
+                            System.out.println("!!!!!!!!" + "OK");
                         } catch (Exception e) {
-                            Log.d("!!!!!!!!!!!!!!!!!","Exception lancé");
+                            System.out.println("!!!!!!!!!!!!!!!!!" + "Exception lancé");
                             e.printStackTrace();
                         }
                     }
@@ -153,15 +156,29 @@ public class AccueilEventsFragment extends Fragment {
             Date date = new DateTest(Integer.parseInt(annee), moisToInt(mois), Integer.parseInt(jour)).getDate();
             Adresse adresse = new Adresse(numeroRue, rue, ville, codePostal);
 
-            Personne p = new Personne("BRETZNER", "Raphaël", "rbretzner@gmail.com", "");
+          /*  Personne p = new Personne("BRETZNER", "Raphaël", "rbretzner@gmail.com", "");
             Evenement evenement = new Evenement(nomEvent, "", 0,
                     Integer.valueOf(nbPlaceEvent), date,
                     descriptionEvent, adresse, p, Boolean.valueOf(estPrive));
+          */
 
-            evenementAdapter.ajouterEvenement(evenement);
+            try {
+                url = new URL(myurl);
+                connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+                InputStream inputStream = connection.getInputStream();
+                String result = InputStreamOperations.InputStreamToString(inputStream);
+                // On récupère le tableau d'objets qui nous concerne
+                JSONArray array = new JSONArray(result);
 
-            for (Evenement e : evenements_trie_date) {
-                System.out.println("bouble des évènements " + e.toString());
+                /**
+                 *  Il me faut l'action pour ajouter un évènement dans la BD
+                 *  Quelqu'un peut donner la liste des actions possibles sur le serveur
+                 *  À part action=resultat_allEvents
+                 */
+
+            } catch (Exception e) {
+
             }
         }
     }
