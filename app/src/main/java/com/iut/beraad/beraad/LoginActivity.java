@@ -110,8 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                             try {
                                 user = new Personne(object.getString("firstname").toString(),
                                         object.getString("name").toString(),
-                                        object.getString("email").toString(),
-                                        ""
+                                        object.getString("email").toString()
                                         );
                                 user.facebookID = object.getString("id").toString();
                                 user.gender = object.getString("gender").toString();

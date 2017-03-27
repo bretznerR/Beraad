@@ -69,17 +69,17 @@ public class ListeAmisFragment extends Fragment{
     }
 
     public void ajouterAmis() {
-        this.amis_trie_alphabetique.add(new Personne("Adrien","Lemaire","alemaire@gmail.com","http://cdn.totalfratmove.com/wp-content/uploads/2014/05/aaa7b6989215edd925f1dcc852bc7bd3.png"));
-        this.amis_trie_alphabetique.add(new Personne("Raphael","Bretzner","rbretzner@gmail.com","http://cdn.totalfratmove.com/wp-content/uploads/2014/05/aaa7b6989215edd925f1dcc852bc7bd3.png"));
-        this.amis_trie_alphabetique.add(new Personne("Benjamin","Pasqualetto","bpasqualetto@gmail.com","http://cdn.totalfratmove.com/wp-content/uploads/2014/05/aaa7b6989215edd925f1dcc852bc7bd3.png"));
-        this.amis_trie_alphabetique.add(new Personne("Jean-Michel","Dupont","jmdupont@gmail.com","http://cdn.totalfratmove.com/wp-content/uploads/2014/05/aaa7b6989215edd925f1dcc852bc7bd3.png"));
-        this.amis_trie_alphabetique.add(new Personne("Saul","Goodman","sgoodmanr@gmail.com","http://cdn.totalfratmove.com/wp-content/uploads/2014/05/aaa7b6989215edd925f1dcc852bc7bd3.png"));
-        this.amis_trie_alphabetique.add(new Personne("White","Walter","wwalter@gmail.com","http://cdn.totalfratmove.com/wp-content/uploads/2014/05/aaa7b6989215edd925f1dcc852bc7bd3.png"));
-        this.amis_trie_alphabetique.add(new Personne("Jesse","Pinkman","jpinkman@gmail.com","http://cdn.totalfratmove.com/wp-content/uploads/2014/05/aaa7b6989215edd925f1dcc852bc7bd3.png"));
-        this.amis_trie_alphabetique.add(new Personne("Bruce","Wayne","bwayne@gmail.com","http://cdn.totalfratmove.com/wp-content/uploads/2014/05/aaa7b6989215edd925f1dcc852bc7bd3.png"));
-        this.amis_trie_alphabetique.add(new Personne("Marco","Veratti","mveratti@gmail.com","http://cdn.totalfratmove.com/wp-content/uploads/2014/05/aaa7b6989215edd925f1dcc852bc7bd3.png"));
-        this.amis_trie_alphabetique.add(new Personne("Daryl","Dickson","ddickson@gmail.com","http://cdn.totalfratmove.com/wp-content/uploads/2014/05/aaa7b6989215edd925f1dcc852bc7bd3.png"));
-        this.amis_trie_alphabetique.add(new Personne("Zlatan","Ibrahimovic","zibrahimovic@gmail.com","http://cdn.totalfratmove.com/wp-content/uploads/2014/05/aaa7b6989215edd925f1dcc852bc7bd3.png"));
+        this.amis_trie_alphabetique.add(new Personne("Adrien","Lemaire","alemaire@gmail.com"));
+        this.amis_trie_alphabetique.add(new Personne("Raphael","Bretzner","rbretzner@gmail.com"));
+        this.amis_trie_alphabetique.add(new Personne("Benjamin","Pasqualetto","bpasqualetto@gmail.com"));
+        this.amis_trie_alphabetique.add(new Personne("Jean-Michel","Dupont","jmdupont@gmail.com"));
+        this.amis_trie_alphabetique.add(new Personne("Saul","Goodman","sgoodmanr@gmail.com"));
+        this.amis_trie_alphabetique.add(new Personne("White","Walter","wwalter@gmail.com"));
+        this.amis_trie_alphabetique.add(new Personne("Jesse","Pinkman","jpinkman@gmail.com"));
+        this.amis_trie_alphabetique.add(new Personne("Bruce","Wayne","bwayne@gmail.com"));
+        this.amis_trie_alphabetique.add(new Personne("Marco","Veratti","mveratti@gmail.com"));
+        this.amis_trie_alphabetique.add(new Personne("Daryl","Dickson","ddickson@gmail.com"));
+        this.amis_trie_alphabetique.add(new Personne("Zlatan","Ibrahimovic","zibrahimovic@gmail.com"));
     }
 
     public void supprimerAmis(Personne e) {

@@ -21,11 +21,11 @@ public class Personne {
     private SortedSet<Evenement> listeEvenements;
 
 
-    public Personne(String prenom, String nom, String email, String url_img) {
+    public Personne(String prenom, String nom, String email) {
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
-        this.url_img = url_img;
+        this.url_img = "https://graph.facebook.com/" + facebookID + "/picture?type=large";
         this.listeAmis = new TreeSet<>();
         this.listeEvenements = new TreeSet(new ComparateurParDate());
     }

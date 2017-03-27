@@ -6,11 +6,11 @@ package com.iut.beraad.beraad;
 
 public class PersonneConnecte extends Personne{
 
-    public PersonneConnecte(String prenom, String nom, String email, String url_img) {
-        super(prenom, nom, email, url_img);
+    public PersonneConnecte(String prenom, String nom, String email) {
+        super(prenom, nom, email);
     }
 
     public static Personne getPersonneConnecte() {
-        return new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com","https://pbs.twimg.com/profile_images/627117609444581380/7YG7kxA4.png");
+        return new Personne("Raphaël", "Bretzner", "rbretzner@gmail.com");
     }
 }
