@@ -1,5 +1,6 @@
 package com.iut.beraad.beraad;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,15 +20,6 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
-import android.util.Base64;
-import android.util.Log;
-import com.facebook.FacebookSdk;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by Adrien on 18/03/2017.
@@ -50,36 +42,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_main);
+        System.out.println("yoooooooooooooooooo => " + 1);
+        setContentView(R.layout.activity_connexion);
+        System.out.println("yoooooooooooooooooo => " + 2);
 
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        try {
-            PackageInfo info = getPackageManager().getPackageInfo(
-                    "com.example.raphaelbretzner.facebookconnect",  // replace with your unique package name
-                    PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                System.out.println("KeyHash:" + Base64.encodeToString(md.digest(), Base64.DEFAULT));
-            }
-        } catch (PackageManager.NameNotFoundException e) {
-            System.out.println("ERRRRRROR");
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+        LoginActivity loginActivity = new LoginActivity();
+        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(intent);
 
 
-////        Fragment fragment=null;
-////        Class fragmentClass = AccueilEventsFragment.class;
-////
-////        try {
-////         fragment = (Fragment) fragmentClass.newInstance();
-////        } catch (InstantiationException e) {
-////            e.printStackTrace();
-////        } catch (IllegalAccessException e) {
-////            e.printStackTrace();
-////        }
+//        Fragment fragment=null;
+//        Class fragmentClass = AccueilEventsFragment.class;
+//
+//        try {
+//         fragment = (Fragment) fragmentClass.newInstance();
+//        } catch (InstantiationException e) {
+//            e.printStackTrace();
+//        } catch (IllegalAccessException e) {
+//            e.printStackTrace();
+//        }
 //        FragmentManager fragmentManager = getSupportFragmentManager();
 //        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 

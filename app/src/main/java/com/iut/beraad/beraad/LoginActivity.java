@@ -1,11 +1,9 @@
 package com.iut.beraad.beraad;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,28 +34,14 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_connexion);
 
         if (PrefUtils.getCurrentUser(LoginActivity.this) != null) {
+            Intent homeIntent = new Intent(LoginActivity.this, AccueilEventsFragment.class);
 
-            Fragment fragment=null;
-            Class fragmentClass = AccueilEventsFragment.class;
+            startActivity(homeIntent);
 
-            try {
-                fragment = (Fragment) fragmentClass.newInstance();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
-
-//            Intent homeIntent = new Intent(LoginActivity.this, AccueilEventsFragment.class);
-//
-//            startActivity(homeIntent);
-//
-//            finish();
+            finish();
         }
         else {
             System.out.println("errrrrooooooooor");
