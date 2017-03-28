@@ -28,14 +28,14 @@ import java.util.TreeSet;
 
 public class AccueilEventsFragment extends Fragment {
 
+    private final int REQUEST_CODE = 20;
+    EvenementAdapter evenementAdapter;
+    View view;
+    HttpURLConnection connection;
     private RecyclerView recyclerView;
     private SortedSet<Evenement> evenements_trie_date;
     private FloatingActionButton fab;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-
-    EvenementAdapter evenementAdapter;
-    View view;
-    private final int REQUEST_CODE = 20;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -80,7 +80,7 @@ public class AccueilEventsFragment extends Fragment {
 //                            String myurl= "http://adrien.pre-prod.space/Beraad/index.php?module=evenement&action=resultat_allEvents";
                             String myurl= "http://pageperso.iut.univ-paris8.fr/~alemaire/Beraad/index.php?module=evenement&action=resultat_allEvents";
                             URL url = new URL(myurl);
-                            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                            connection = (HttpURLConnection) url.openConnection();
                             connection.connect();
                             InputStream inputStream = connection.getInputStream();
                             String result = InputStreamOperations.InputStreamToString(inputStream);
@@ -158,51 +158,10 @@ public class AccueilEventsFragment extends Fragment {
                     Integer.valueOf(nbPlaceEvent), date,
                     descriptionEvent, adresse, p, Boolean.valueOf(estPrive));
           */
+          String myurl = "http://pageperso.iut.univ-paris8.fr/~alemaire/Beraad/index.php?module=evenement&action=post_event";
+            URL url = new URL(myurl);
+          connection = (HttpURLConnection) url.openConnection();
         }
-    }
-
-    class MyDownloadTask extends AsyncTask<Void,Void,Void> {
-        @Override
-        protected Void doInBackground(Void... params) {
-            try {
-                String myurl= "http://pageperso.iut.univ-paris8.fr/~alemaire/Beraad/index.php?module=evenement&action=resultat_allEvents";
-                URL url = new URL(myurl);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-                InputStream inputStream = connection.getInputStream();
-                String result = InputStreamOperations.InputStreamToString(inputStream);
-                // On récupère le tableau d'objets qui nous concerne
-                JSONArray array = new JSONArray(result);
-                evenements_trie_date.clear();
-                for (int i=0; i<array.length(); i++) {
-                    System.out.println("ok"+i);
-                    // On récupère un objet JSON du tableau
-                    JSONObject obj = new JSONObject(array.getString(i));
-                    // On fait le lien Personne - Objet JSON
-                    evenements_trie_date.add(new Evenement(
-                            obj.getString("nomEvent"),
-                            obj.getString("image"),
-                            Integer.parseInt(obj.getString("nbParticipants")),
-                            Integer.parseInt(obj.getString("capacite")),
-                            DateTest.makeDateFromString(obj.getString("dateEvent")),
-                            obj.getString("description"),
-                            new Adresse(obj.getString("numero"),obj.getString("rue"),obj.getString("ville"),obj.getString("codePostal")),
-                            new Personne("Adrien","Lemaire","adrien@gmail.com"),
-                            false));
-                    System.out.println("HELLO HELLO HELLO HELLO HELLO HELLO ");
-                }
-            } catch (Exception e) {
-                Log.d("!!!!!!!!!!!!!!!!!","Exception lancé");
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            recyclerView.setAdapter(new EvenementAdapter(evenements_trie_date));
-        }
-
     }
 
     public int moisToInt(String s) {
@@ -282,6 +241,50 @@ public class AccueilEventsFragment extends Fragment {
 
     public void ajouterEvenement(Evenement e) {
         evenements_trie_date.add(e);
+    }
+
+    class MyDownloadTask extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            try {
+                String myurl= "http://pageperso.iut.univ-paris8.fr/~alemaire/Beraad/index.php?module=evenement&action=resultat_allEvents";
+                URL url = new URL(myurl);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.connect();
+                InputStream inputStream = connection.getInputStream();
+                String result = InputStreamOperations.InputStreamToString(inputStream);
+                // On récupère le tableau d'objets qui nous concerne
+                JSONArray array = new JSONArray(result);
+                evenements_trie_date.clear();
+                for (int i=0; i<array.length(); i++) {
+                    System.out.println("ok"+i);
+                    // On récupère un objet JSON du tableau
+                    JSONObject obj = new JSONObject(array.getString(i));
+                    // On fait le lien Personne - Objet JSON
+                    evenements_trie_date.add(new Evenement(
+                            obj.getString("nomEvent"),
+                            obj.getString("image"),
+                            Integer.parseInt(obj.getString("nbParticipants")),
+                            Integer.parseInt(obj.getString("capacite")),
+                            DateTest.makeDateFromString(obj.getString("dateEvent")),
+                            obj.getString("description"),
+                            new Adresse(obj.getString("numero"),obj.getString("rue"),obj.getString("ville"),obj.getString("codePostal")),
+                            new Personne("Adrien","Lemaire","adrien@gmail.com"),
+                            false));
+                    System.out.println("HELLO HELLO HELLO HELLO HELLO HELLO ");
+                }
+            } catch (Exception e) {
+                Log.d("!!!!!!!!!!!!!!!!!","Exception lancé");
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            recyclerView.setAdapter(new EvenementAdapter(evenements_trie_date));
+        }
+
     }
 
 }
