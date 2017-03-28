@@ -1,32 +1,28 @@
 package com.iut.beraad.beraad;
 
-import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.seatgeek.placesautocomplete.DetailsCallback;
 import com.seatgeek.placesautocomplete.OnPlaceSelectedListener;
 import com.seatgeek.placesautocomplete.PlacesAutocompleteTextView;
-import com.seatgeek.placesautocomplete.model.AddressComponent;
-import com.seatgeek.placesautocomplete.model.AddressComponentType;
 import com.seatgeek.placesautocomplete.model.Place;
 import com.seatgeek.placesautocomplete.model.PlaceDetails;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -63,6 +59,12 @@ public class AjoutEventActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
+    private String[] adresse;
+    private final String USER_AGENT = "Mozilla/5.0";
+    String urlParameters;
+    DialogFragment newFragmentDate;
+    DialogFragment newFragmentHeure;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,8 +92,11 @@ public class AjoutEventActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(final PlaceDetails details) {
                         System.out.println("Test -> success");
-                        String[] adr = getAdresse(details);
-                        evenementCree(adr);
+                        getAdresse(details);
+                        System.out.println("HAAAAAAAAAAAA");
+                        System.out.println(adresse[0]+adresse[1]+adresse[2]+adresse[3]);
+                        System.out.println(dateEvent.getText().toString());
+                        evenementCree(adresse);
                     }
                     @Override
                     public void onFailure(final Throwable failure) {
@@ -103,29 +108,21 @@ public class AjoutEventActivity extends AppCompatActivity {
 
     }
 
-
     public void evenementCree(final String[] adresse) {
         creerEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
+                        @Override
             public void onClick(View v) {
-
-                Intent data = new Intent();
-                data.putExtra("nomEvent", nomEvent.getText().toString());
-                data.putExtra("descriptionEvent", descriptionEvent.getText().toString());
-                data.putExtra("nbPlaceEvent", nbPlaceEvent.getText().toString());
-
-                data.putExtra("numeroRue", adresse[0]);
-                data.putExtra("rue", adresse[1]);
-                data.putExtra("ville", adresse[2]);
-                data.putExtra("codePostal", adresse[3]);
-
-                data.putExtra("dateEvent", dateEvent.getText().toString());
-                data.putExtra("heureEvent", heureEvent.getText().toString());
-                data.putExtra("estPrive", Boolean.toString(estPrive.isChecked()));
-
-                setResult(RESULT_OK, data);
-                finish();
-
+                urlParameters = "nomEvent="+nomEvent.getText().toString()
+                        +"&capacite="+nbPlaceEvent.getText().toString()
+                        +"&description="+descriptionEvent.getText().toString()
+                        +"&dateEvent="+newFragmentDate.toString()
+                        +"&heure="+newFragmentHeure.toString()
+                        +"&image=http://cafoc-auvergne2.net/campus/pluginfile.php/1943/course/overviewfiles/bigstock-Test-word-on-white-keyboard-27134336.jpg"
+                        +"&numero="+adresse[0]
+                        +"&rue="+adresse[1]
+                        +"&ville="+adresse[2]
+                        +"&codePostal="+adresse[3];
+                new MyDownloadTask().execute();
             }
         });
     }
@@ -139,18 +136,97 @@ public class AjoutEventActivity extends AppCompatActivity {
         adresse[4] = details.address_components.get(3).long_name;
         adresse[5] = details.address_components.get(4).long_name;
         adresse[6] = details.address_components.get(5).long_name;
+        this.adresse = adresse;
         return adresse;
     }
 
     public void showDatePickerDialog(View v) {
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getFragmentManager(), "datePicker");
+        newFragmentDate = new DatePickerFragment();
+        newFragmentDate.show(getFragmentManager(), "datePicker");
     }
 
     public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getFragmentManager(), "timePicker");
+        newFragmentHeure = new TimePickerFragment();
+        newFragmentHeure.show(getFragmentManager(), "timePicker");
     }
 
+    class MyDownloadTask extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            try {
+                String myurl = "http://pageperso.iut.univ-paris8.fr/~alemaire/Beraad/index.php?module=evenement&action=post_event";
+                URL url = new URL(myurl);
+                URLConnection conn = url.openConnection();
+                conn.setDoOutput(true);
+                OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+
+                writer.write(urlParameters);
+                writer.flush();
+                String line;
+                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
+                writer.close();
+                reader.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            Intent intent = new Intent(AjoutEventActivity.this,MainActivity.class);
+            startActivity(intent);
+        }
+    }
+
+    public int moisToInt(String s) {
+        int mois;
+        switch (s) {
+            case "Janvier":
+                mois = 0;
+                break;
+            case "Février":
+                mois = 1;
+                break;
+            case "Mars":
+                mois = 2;
+                break;
+            case "Avril":
+                mois = 3;
+                break;
+            case "Mai":
+                mois = 4;
+                break;
+            case "Juin":
+                mois = 5;
+                break;
+            case "Juillet":
+                mois = 6;
+                break;
+            case "Août":
+                mois = 7;
+                break;
+            case "Septembre":
+                mois = 8;
+                break;
+            case "Octobre":
+                mois = 9;
+                break;
+            case "Novembre":
+                mois = 10;
+                break;
+            case "Décembre":
+                mois = 11;
+                break;
+            default:
+                mois = -1;
+                break;
+        }
+        return mois;
+    }
 
 }

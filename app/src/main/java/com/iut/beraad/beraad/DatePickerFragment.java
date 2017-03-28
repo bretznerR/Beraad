@@ -16,6 +16,8 @@ import java.util.Calendar;
 public class DatePickerFragment extends DialogFragment
         implements DatePickerDialog.OnDateSetListener {
 
+    private DatePicker dp;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the current date as the default date in the picker
@@ -30,10 +32,15 @@ public class DatePickerFragment extends DialogFragment
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
         // Do something with the date chosen by the user
+        dp = view;
         TextView tv1= (TextView) getActivity().findViewById(R.id.datePicker);
-        tv1.setText("Le " + view.getDayOfMonth() + " " + traductionMois(view.getMonth()) + " " + view.getYear());
+        tv1.setText("Le " + dp.getDayOfMonth() + " " + traductionMois(dp.getMonth()) + " " + dp.getYear());
        // tv1.setText("Year: "+view.getYear()+" Month: "+view.getMonth()+" Day: "+view.getDayOfMonth());
+    }
 
+    @Override
+    public String toString() {
+        return dp.getYear()+"-"+dp.getMonth()+"-"+dp.getDayOfMonth();
     }
 
     public String traductionMois(int n) {
