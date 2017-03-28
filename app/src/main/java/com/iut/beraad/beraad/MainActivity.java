@@ -42,27 +42,21 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("yoooooooooooooooooo => " + 1);
-        setContentView(R.layout.activity_connexion);
-        System.out.println("yoooooooooooooooooo => " + 2);
-
-        LoginActivity loginActivity = new LoginActivity();
-        Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-        startActivity(intent);
+        setContentView(R.layout.activity_main);
 
 
-//        Fragment fragment=null;
-//        Class fragmentClass = AccueilEventsFragment.class;
-//
-//        try {
-//         fragment = (Fragment) fragmentClass.newInstance();
-//        } catch (InstantiationException e) {
-//            e.printStackTrace();
-//        } catch (IllegalAccessException e) {
-//            e.printStackTrace();
-//        }
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+        Fragment fragment=null;
+        Class fragmentClass = AccueilEventsFragment.class;
+
+        try {
+         fragment = (Fragment) fragmentClass.newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
 
         // Set a Toolbar to replace the ActionBar.
