@@ -2,6 +2,9 @@ package com.iut.beraad.beraad;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -17,7 +20,12 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.Profile;
 import com.squareup.picasso.Picasso;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -37,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
     private View headerView;
 
     public Personne personne;
+    private Bitmap bitmap;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         Fragment fragment=null;
         Class fragmentClass = AccueilEventsFragment.class;
@@ -81,6 +89,33 @@ public class MainActivity extends AppCompatActivity {
         navEmail.setText(PersonneConnecte.getPersonneConnecte().getEmail());
 
         navImg = (CircleImageView) headerView.findViewById(R.id.tv_image);
+
+        // fetching facebook's profile picture
+        new AsyncTask<Void,Void,Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                URL imageURL = null;
+                try {
+                    imageURL = new URL("https://graph.facebook.com/" + Profile.getCurrentProfile().getId() + "/picture?type=large");
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    bitmap  = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                navImg.setImageBitmap(bitmap);
+            }
+        }.execute();
+
         Picasso.with(getApplicationContext()).load(PersonneConnecte.getPersonneConnecte().getUrl_img()).centerCrop().fit().into(navImg);
 
         RelativeLayout relativeLayout = (RelativeLayout) headerView.findViewById(R.id.bloc_header);

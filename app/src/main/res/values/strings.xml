@@ -33,5 +33,6 @@
     <string name="facebook_app_id">1116862081775065</string>
 
     <string name="title_activity_logout">LogoutActivity</string>
+    <string name="deconnecter_compte">Se déconnecter</string>
 
 </resources>

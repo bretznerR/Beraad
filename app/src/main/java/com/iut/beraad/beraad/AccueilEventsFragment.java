@@ -158,9 +158,6 @@ public class AccueilEventsFragment extends Fragment {
                     Integer.valueOf(nbPlaceEvent), date,
                     descriptionEvent, adresse, p, Boolean.valueOf(estPrive));
           */
-          String myurl = "http://pageperso.iut.univ-paris8.fr/~alemaire/Beraad/index.php?module=evenement&action=post_event";
-            URL url = new URL(myurl);
-          connection = (HttpURLConnection) url.openConnection();
         }
     }
 
