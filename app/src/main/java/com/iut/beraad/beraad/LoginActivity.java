@@ -1,5 +1,7 @@
 package com.iut.beraad.beraad;
 
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -11,13 +13,11 @@ import android.widget.Toast;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 
@@ -40,11 +40,27 @@ public class LoginActivity extends AppCompatActivity {
 
         if (PrefUtils.getCurrentUser(LoginActivity.this) != null) {
 
-            Intent homeIntent = new Intent(LoginActivity.this, LogoutActivity.class);
+            Fragment fragment=null;
+            Class fragmentClass = AccueilEventsFragment.class;
 
-            startActivity(homeIntent);
+            try {
+                fragment = (Fragment) fragmentClass.newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
-            finish();
+//            Intent homeIntent = new Intent(LoginActivity.this, AccueilEventsFragment.class);
+//
+//            startActivity(homeIntent);
+//
+//            finish();
+        }
+        else {
+            System.out.println("errrrrooooooooor");
         }
     }
 

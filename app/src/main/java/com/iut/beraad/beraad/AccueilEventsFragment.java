@@ -36,9 +36,6 @@ public class AccueilEventsFragment extends Fragment {
     EvenementAdapter evenementAdapter;
     View view;
     private final int REQUEST_CODE = 20;
-    private URL url;
-    private HttpURLConnection connection;
-    private String myurl;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -81,9 +78,9 @@ public class AccueilEventsFragment extends Fragment {
                         System.out.println("hey?");
                         try {
 //                            String myurl= "http://adrien.pre-prod.space/Beraad/index.php?module=evenement&action=resultat_allEvents";
-                            myurl= "http://pageperso.iut.univ-paris8.fr/~alemaire/Beraad/index.php?module=evenement&action=resultat_allEvents";
-                            url = new URL(myurl);
-                            connection = (HttpURLConnection) url.openConnection();
+                            String myurl= "http://pageperso.iut.univ-paris8.fr/~alemaire/Beraad/index.php?module=evenement&action=resultat_allEvents";
+                            URL url = new URL(myurl);
+                            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                             connection.connect();
                             InputStream inputStream = connection.getInputStream();
                             String result = InputStreamOperations.InputStreamToString(inputStream);
@@ -161,25 +158,6 @@ public class AccueilEventsFragment extends Fragment {
                     Integer.valueOf(nbPlaceEvent), date,
                     descriptionEvent, adresse, p, Boolean.valueOf(estPrive));
           */
-
-            try {
-                url = new URL(myurl);
-                connection = (HttpURLConnection) url.openConnection();
-                connection.connect();
-                InputStream inputStream = connection.getInputStream();
-                String result = InputStreamOperations.InputStreamToString(inputStream);
-                // On récupère le tableau d'objets qui nous concerne
-                JSONArray array = new JSONArray(result);
-
-                /**
-                 *  Il me faut l'action pour ajouter un évènement dans la BD
-                 *  Quelqu'un peut donner la liste des actions possibles sur le serveur
-                 *  À part action=resultat_allEvents
-                 */
-
-            } catch (Exception e) {
-
-            }
         }
     }
 
