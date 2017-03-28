@@ -34,5 +34,6 @@
 
     <string name="title_activity_logout">LogoutActivity</string>
     <string name="deconnecter_compte">Se déconnecter</string>
+    <string name="login_with_facebook">Se connecter avec Facebook</string>
 
 </resources>

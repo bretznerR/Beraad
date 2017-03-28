@@ -5,7 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -14,16 +14,11 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 
 /**
  * Created by raphaelbretzner on 27/03/2017.
@@ -33,28 +28,20 @@ public class LoginActivity extends AppCompatActivity {
 
     private CallbackManager callbackManager;
     private LoginButton loginButton;
-    private TextView btnLogin;
+    private Button btnLogin;
     private ProgressDialog progressDialog;
     Personne user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         FacebookSdk.sdkInitialize(getApplicationContext());
-        System.out.println("----------> " + 0);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connexion);
-        System.out.println("----------> " + 1);
         if(PrefUtils.getCurrentUser(LoginActivity.this) != null){
-            System.out.println("----------> " + 2);
-            Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
 
             startActivity(homeIntent);
-            System.out.println("----------> " + 3);
             finish();
-        }
-
-        else {
-            System.out.println("errrrrooooooooor");
         }
     }
 
@@ -62,20 +49,18 @@ public class LoginActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-
         callbackManager = CallbackManager.Factory.create();
 
         loginButton = (LoginButton) findViewById(R.id.login_button);
 
         loginButton.setReadPermissions("public_profile", "email", "user_friends");
 
-        btnLogin = (TextView) findViewById(R.id.btnLogin);
+        btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 progressDialog = new ProgressDialog(LoginActivity.this);
-                progressDialog.setMessage("Loading...");
                 progressDialog.show();
 
                 loginButton.performClick();
@@ -107,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
 
             progressDialog.dismiss();
 
-            // App code
+            // Code principal
             GraphRequest request = GraphRequest.newMeRequest(
                     loginResult.getAccessToken(),
                     new GraphRequest.GraphJSONObjectCallback() {
@@ -115,8 +100,6 @@ public class LoginActivity extends AppCompatActivity {
                         public void onCompleted(
                                 JSONObject object,
                                 GraphResponse response) {
-
-                            System.out.println("object: " + object + "");
 
                             try {
                                 String longName = object.getString("name").toString();
@@ -128,13 +111,13 @@ public class LoginActivity extends AppCompatActivity {
                                         );
                                 user.facebookID = object.getString("id").toString();
                                 user.gender = object.getString("gender").toString();
-                                PrefUtils.setCurrentUser(user, LoginActivity.this);
+                                PrefUtils.setCurrentUser(user, getApplicationContext());
 
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                            Toast.makeText(LoginActivity.this, "welcome " + user.getNom(), Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            Toast.makeText(LoginActivity.this, "Bienvenue " + Profile.getCurrentProfile().getName(), Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                             finish();
 

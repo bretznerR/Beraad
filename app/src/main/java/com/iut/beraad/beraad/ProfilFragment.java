@@ -27,7 +27,6 @@ import java.net.URL;
 public class ProfilFragment extends Fragment {
 
     private TextView nomprenom_profil;
-    private TextView email_profil;
     ImageView image_profil;
     Bitmap bitmap;
 
@@ -37,7 +36,6 @@ public class ProfilFragment extends Fragment {
         View view = inflater.inflate(R.layout.content_profil,container,false);
 
         this.nomprenom_profil = (TextView) view.findViewById(R.id.nomprenom_profil);
-        this.email_profil = (TextView) view.findViewById(R.id.email_profil);
         this.image_profil = (ImageView) view.findViewById(R.id.image_profil);
 
         this.nomprenom_profil.setText(Profile.getCurrentProfile().getName());
