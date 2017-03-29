@@ -113,8 +113,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }.execute();
 
-        Picasso.with(getApplicationContext()).load(PersonneConnecte.getPersonneConnecte().getUrl_img()).centerCrop().fit().into(navImg);
-
         RelativeLayout relativeLayout = (RelativeLayout) headerView.findViewById(R.id.bloc_header);
 
         relativeLayout.setBackgroundResource(R.drawable.parisguidetower);

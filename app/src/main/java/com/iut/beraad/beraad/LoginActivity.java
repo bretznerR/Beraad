@@ -105,9 +105,8 @@ public class LoginActivity extends AppCompatActivity {
                                 String longName = object.getString("name").toString();
                                 String fname = longName.substring(0, longName.indexOf(" "));
                                 String name = longName.substring(longName.indexOf(" "), longName.length());
-                                user = new Personne(fname,
-                                        name,
-                                        object.getString("email").toString()
+                                user = new Personne(object.getString("id").toString(), fname,
+                                        name
                                         );
                                 user.facebookID = object.getString("id").toString();
                                 user.gender = object.getString("gender").toString();

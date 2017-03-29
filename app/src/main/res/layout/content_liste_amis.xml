@@ -33,13 +33,14 @@
                 android:tint="@color/colorAccent"
                 app:srcCompat="@drawable/ic_search" />
 
-            <EditText
+            <AutoCompleteTextView
                 android:id="@+id/ami_cherche_ami"
                 android:layout_width="345dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                />
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
@@ -57,7 +58,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:tint="@color/cardview_light_background"
-        app:srcCompat="@drawable/ic_person_add"
+        app:srcCompat="@drawable/ic_search"
         app:rippleColor="?android:attr/detailsElementBackground" />
 
 </android.support.design.widget.CoordinatorLayout>
