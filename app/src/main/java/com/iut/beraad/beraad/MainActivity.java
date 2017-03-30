@@ -20,6 +20,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.GraphRequest;
 import com.facebook.Profile;
 import com.squareup.picasso.Picasso;
 
@@ -40,11 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private ActionBarDrawerToggle drawerToggle;
 
     private TextView navUsername;
-    private TextView navEmail;
     private CircleImageView navImg;
     private View headerView;
 
-    public Personne personne;
     private Bitmap bitmap;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -84,9 +83,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nvView);
         headerView = navigationView.getHeaderView(0);
         navUsername = (TextView) headerView.findViewById(R.id.tv_prenom_nom);
-        navUsername.setText(PersonneConnecte.getPersonneConnecte().getPrenom()+" "+PersonneConnecte.getPersonneConnecte().getNom());
-        navEmail = (TextView) headerView.findViewById(R.id.tv_email);
-        navEmail.setText(PersonneConnecte.getPersonneConnecte().getEmail());
+        navUsername.setText(Profile.getCurrentProfile().getName());
 
         navImg = (CircleImageView) headerView.findViewById(R.id.tv_image);
 
@@ -115,8 +112,6 @@ public class MainActivity extends AppCompatActivity {
                 navImg.setImageBitmap(bitmap);
             }
         }.execute();
-
-        Picasso.with(getApplicationContext()).load(PersonneConnecte.getPersonneConnecte().getUrl_img()).centerCrop().fit().into(navImg);
 
         RelativeLayout relativeLayout = (RelativeLayout) headerView.findViewById(R.id.bloc_header);
 

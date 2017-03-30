@@ -1,6 +1,9 @@
 package com.iut.beraad.beraad;
 
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -11,6 +14,10 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /**
  * Created by Adrien on 21/03/2017.
  */
@@ -18,11 +25,12 @@ import com.squareup.picasso.Picasso;
 public class AmisViewHolder extends RecyclerView.ViewHolder {
 
     private TextView ami_nom_prenom;
-    private ImageView ami_image;
+    final ImageView ami_image;
     private LinearLayout ami_bloc;
     private LinearLayout ami_plus;
     public ImageButton ami_supp_ami;
     private boolean estVisible = false;
+    private Bitmap bitmap;
 
     public AmisViewHolder(final View itemView) {
         super(itemView);
@@ -66,8 +74,33 @@ public class AmisViewHolder extends RecyclerView.ViewHolder {
 
     }
 
-    public void bind(Personne personne){
+    public void bind(final Personne personne){
         this.ami_nom_prenom.setText(personne.getPrenom()+" "+personne.getNom());
-        Picasso.with(this.ami_image.getContext()).load(personne.getUrl_img()).centerCrop().fit().into(this.ami_image);
+
+        new AsyncTask<Void,Void,Void>(){
+            @Override
+            public Void doInBackground(Void... params) {
+                URL imageURL = null;
+                try {
+                    System.out.println("https://graph.facebook.com/" + personne.facebookID + "/picture?type=large");
+                    imageURL = new URL("https://graph.facebook.com/" + personne.facebookID + "/picture?type=large");
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    bitmap  = BitmapFactory.decodeStream(imageURL.openConnection().getInputStream());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void aVoid) {
+                super.onPostExecute(aVoid);
+                ami_image.setImageBitmap(bitmap);
+            }
+        }.execute();
     }
 }

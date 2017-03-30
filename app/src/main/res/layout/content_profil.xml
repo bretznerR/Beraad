@@ -30,16 +30,6 @@
             android:textAlignment="textStart"
             android:textSize="36sp" />
 
-        <TextView
-            android:id="@+id/email_profil"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.02"
-            android:text="@string/email_profil"
-            android:textAlignment="textStart"
-            android:textSize="16sp"
-            tools:ignore="NestedWeights" />
-
         <Button
             android:text="@string/modifier_profil"
             android:layout_width="match_parent"

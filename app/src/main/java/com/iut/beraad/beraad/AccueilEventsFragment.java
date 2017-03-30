@@ -16,6 +16,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.facebook.Profile;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -42,6 +44,7 @@ public class AccueilEventsFragment extends Fragment {
         this.evenements_trie_date = new TreeSet(new ComparateurParDate());
         new MyDownloadTask().execute();
 
+        System.out.println("test test aahahahhahah");
         System.out.println(evenements_trie_date);
 
         evenementAdapter = new EvenementAdapter(evenements_trie_date);
@@ -74,6 +77,7 @@ public class AccueilEventsFragment extends Fragment {
                     @Override
                     public void run() {
                         try {
+//                            String myurl= "http://adrien.pre-prod.space/Beraad/index.php?module=evenement&action=resultat_allEvents";
                             String myurl= "http://pageperso.iut.univ-paris8.fr/~alemaire/Beraad/index.php?module=evenement&action=resultat_allEvents";
                             URL url = new URL(myurl);
                             connection = (HttpURLConnection) url.openConnection();
@@ -84,6 +88,7 @@ public class AccueilEventsFragment extends Fragment {
                             JSONArray array = new JSONArray(result);
                             evenements_trie_date.clear();
                             for (int i=0; i<array.length(); i++) {
+                                System.out.println("ok"+i);
                                 // On récupère un objet JSON du tableau
                                 JSONObject obj = new JSONObject(array.getString(i));
                                 // On fait le lien Personne - Objet JSON
@@ -95,7 +100,7 @@ public class AccueilEventsFragment extends Fragment {
                                         DateTest.makeDateFromString(obj.getString("dateEvent")),
                                         obj.getString("description"),
                                         new Adresse(obj.getString("numero"),obj.getString("rue"),obj.getString("ville"),obj.getString("codePostal")),
-                                        new Personne("Adrien","Lemaire","adrien@gmail.com"),
+                                        new Personne(Profile.getCurrentProfile().getId(), Profile.getCurrentProfile().getFirstName(),Profile.getCurrentProfile().getLastName()),
                                         false));
                             }
                         } catch (Exception e) {
@@ -124,6 +129,7 @@ public class AccueilEventsFragment extends Fragment {
         super.onCreateOptionsMenu(menu,inflater);
     }
 
+
     class MyDownloadTask extends AsyncTask<Void,Void,Void> {
         @Override
         protected Void doInBackground(Void... params) {
@@ -150,7 +156,7 @@ public class AccueilEventsFragment extends Fragment {
                             DateTest.makeDateFromString(obj.getString("dateEvent")),
                             obj.getString("description"),
                             new Adresse(obj.getString("numero"),obj.getString("rue"),obj.getString("ville"),obj.getString("codePostal")),
-                            new Personne("Adrien","Lemaire","adrien@gmail.com"),
+                            new Personne(Profile.getCurrentProfile().getId(), Profile.getCurrentProfile().getFirstName(), Profile.getCurrentProfile().getLastName()),
                             false));
                 }
             } catch (Exception e) {
