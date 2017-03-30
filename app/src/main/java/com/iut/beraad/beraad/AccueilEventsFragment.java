@@ -85,7 +85,7 @@ public class AccueilEventsFragment extends Fragment {
                             JSONArray array = new JSONArray(result);
                             evenements_trie_date.clear();
                             for (int i=0; i<array.length(); i++) {
-                                
+
                                 // On récupère un objet JSON du tableau
                                 JSONObject obj = new JSONObject(array.getString(i));
                                 // On fait le lien Personne - Objet JSON
