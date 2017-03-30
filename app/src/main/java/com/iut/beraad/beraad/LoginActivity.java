@@ -14,6 +14,7 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
+import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
@@ -35,21 +36,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         FacebookSdk.sdkInitialize(getApplicationContext());
-        System.out.println("----------> " + 0);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connexion);
-        System.out.println("----------> " + 1);
         if(PrefUtils.getCurrentUser(LoginActivity.this) != null){
-            System.out.println("----------> " + 2);
             Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
-
             startActivity(homeIntent);
-            System.out.println("----------> " + 3);
             finish();
-        }
-
-        else {
-            System.out.println("errrrrooooooooor");
         }
     }
 
@@ -124,7 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                            Toast.makeText(LoginActivity.this, "welcome " + user.getNom(), Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Bienvenue " + Profile.getCurrentProfile().getName(), Toast.LENGTH_LONG).show();
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();

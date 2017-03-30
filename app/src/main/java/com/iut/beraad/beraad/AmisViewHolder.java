@@ -82,7 +82,6 @@ public class AmisViewHolder extends RecyclerView.ViewHolder {
             public Void doInBackground(Void... params) {
                 URL imageURL = null;
                 try {
-                    System.out.println("https://graph.facebook.com/" + personne.facebookID + "/picture?type=large");
                     imageURL = new URL("https://graph.facebook.com/" + personne.facebookID + "/picture?type=large");
                 } catch (MalformedURLException e) {
                     e.printStackTrace();

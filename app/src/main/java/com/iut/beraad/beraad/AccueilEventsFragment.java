@@ -44,9 +44,6 @@ public class AccueilEventsFragment extends Fragment {
         this.evenements_trie_date = new TreeSet(new ComparateurParDate());
         new MyDownloadTask().execute();
 
-        System.out.println("test test aahahahhahah");
-        System.out.println(evenements_trie_date);
-
         evenementAdapter = new EvenementAdapter(evenements_trie_date);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView_events);
 
@@ -88,7 +85,7 @@ public class AccueilEventsFragment extends Fragment {
                             JSONArray array = new JSONArray(result);
                             evenements_trie_date.clear();
                             for (int i=0; i<array.length(); i++) {
-                                System.out.println("ok"+i);
+                                
                                 // On récupère un objet JSON du tableau
                                 JSONObject obj = new JSONObject(array.getString(i));
                                 // On fait le lien Personne - Objet JSON
