@@ -1,7 +1,9 @@
 package com.iut.beraad.beraad;
 
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -20,6 +22,12 @@ import com.facebook.login.widget.LoginButton;
 
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.URL;
+import java.net.URLConnection;
+
 
 /**
  * Created by raphaelbretzner on 27/03/2017.
@@ -32,16 +40,27 @@ public class LoginActivity extends AppCompatActivity {
     private TextView btnLogin;
     private ProgressDialog progressDialog;
     Personne user;
+    String urlParameters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         FacebookSdk.sdkInitialize(getApplicationContext());
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_connexion);
-        if(PrefUtils.getCurrentUser(LoginActivity.this) != null){
+        if(PrefUtils.getCurrentUser(getApplicationContext()) != null || Profile.getCurrentProfile() != null){
             Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(homeIntent);
             finish();
+        }
+    }
+
+    public void verifProfil() {
+        if(user != null && PrefUtils.getCurrentUser(LoginActivity.this) == null) {
+            urlParameters = "fb_id="+user.facebookID
+                    +"&fb_nom="+user.getNom()
+                    +"&fb_prenom="+user.getPrenom();
+            new MyDownloadTask().execute();
         }
     }
 
@@ -60,9 +79,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 progressDialog = new ProgressDialog(LoginActivity.this);
-                progressDialog.setMessage("Loading...");
                 progressDialog.show();
 
                 loginButton.performClick();
@@ -100,25 +117,23 @@ public class LoginActivity extends AppCompatActivity {
                         public void onCompleted(
                                 JSONObject object,
                                 GraphResponse response) {
-                            System.out.println("object: " + object + "");
                             try {
+                                String id = object.getString("id").toString();
+                                System.out.println(id.length());
                                 String longName = object.getString("name").toString();
                                 String fname = longName.substring(0, longName.indexOf(" "));
                                 String name = longName.substring(longName.indexOf(" "), longName.length());
-                                user = new Personne(fname,
-                                        name,
-                                        object.getString("email").toString()
+                                user = new Personne(id, fname,
+                                        name
                                         );
-                                user.facebookID = object.getString("id").toString();
-                                user.gender = object.getString("gender").toString();
-                                PrefUtils.setCurrentUser(user, LoginActivity.this);
+                                verifProfil();
 
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                             Toast.makeText(LoginActivity.this, "Bienvenue " + Profile.getCurrentProfile().getName(), Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            startActivity(intent);
+                            Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(homeIntent);
                             finish();
                         }
 
@@ -140,4 +155,28 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.dismiss();
         }
     };
+
+    class MyDownloadTask extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            if(user != null && PrefUtils.getCurrentUser(LoginActivity.this) == null) {
+                try {
+                    String myurl = "http://pageperso.iut.univ-paris8.fr/~alemaire/Beraad/index.php?module=evenement&action=verifUserExistant";
+                    URL url = new URL(myurl);
+                    URLConnection conn = url.openConnection();
+                    conn.setDoOutput(true);
+                    OutputStreamWriter writer = new OutputStreamWriter(conn.getOutputStream());
+                    writer.write(urlParameters);
+                    writer.flush();
+                    writer.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+
+            return null;
+        }
+    }
 }
