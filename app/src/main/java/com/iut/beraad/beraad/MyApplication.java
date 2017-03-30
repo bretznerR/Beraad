@@ -32,7 +32,7 @@ public class MyApplication extends Application {
                 System.out.println("KeyHash:" + Base64.encodeToString(md.digest(), Base64.DEFAULT));
             }
         } catch (PackageManager.NameNotFoundException e) {
-            System.out.println("ERRRRRROR");
+            System.out.println("ERRRRRROR hash key");
             e.printStackTrace();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
