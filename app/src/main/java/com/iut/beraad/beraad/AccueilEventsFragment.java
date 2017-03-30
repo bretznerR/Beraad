@@ -59,6 +59,7 @@ public class AccueilEventsFragment extends Fragment {
                 startActivityForResult(intent, REQUEST_CODE);
             }
         });
+
         setHasOptionsMenu(true);
 
         mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipeRefreshLayout);
