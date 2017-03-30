@@ -98,7 +98,7 @@ public class AccueilEventsFragment extends Fragment {
                                         DateTest.makeDateFromString(obj.getString("dateEvent")),
                                         obj.getString("description"),
                                         new Adresse(obj.getString("numero"),obj.getString("rue"),obj.getString("ville"),obj.getString("codePostal")),
-                                        new Personne(Profile.getCurrentProfile().getId(), Profile.getCurrentProfile().getFirstName(),Profile.getCurrentProfile().getLastName()),
+                                        new Personne(obj.getString("idFacebook"),"r","t"),
                                         false));
                             }
                         } catch (Exception e) {
