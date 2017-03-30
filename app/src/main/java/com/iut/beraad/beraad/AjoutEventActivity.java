@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.facebook.Profile;
 import com.seatgeek.placesautocomplete.DetailsCallback;
 import com.seatgeek.placesautocomplete.OnPlaceSelectedListener;
 import com.seatgeek.placesautocomplete.PlacesAutocompleteTextView;
@@ -121,7 +122,8 @@ public class AjoutEventActivity extends AppCompatActivity {
                         +"&numero="+adresse[0]
                         +"&rue="+adresse[1]
                         +"&ville="+adresse[2]
-                        +"&codePostal="+adresse[3];
+                        +"&codePostal="+adresse[3]
+                        +"&idfb="+ Profile.getCurrentProfile().getId();
                 new MyDownloadTask().execute();
 
             }
