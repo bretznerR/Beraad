@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
@@ -33,16 +34,20 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        System.out.println("----------> " + 0);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connexion);
-
-        if (PrefUtils.getCurrentUser(LoginActivity.this) != null) {
-            Intent homeIntent = new Intent(LoginActivity.this, AccueilEventsFragment.class);
+        System.out.println("----------> " + 1);
+        if(PrefUtils.getCurrentUser(LoginActivity.this) != null){
+            System.out.println("----------> " + 2);
+            Intent homeIntent = new Intent(LoginActivity.this, MainActivity.class);
 
             startActivity(homeIntent);
-
+            System.out.println("----------> " + 3);
             finish();
         }
+
         else {
             System.out.println("errrrrooooooooor");
         }
@@ -94,9 +99,7 @@ public class LoginActivity extends AppCompatActivity {
     private FacebookCallback<LoginResult> mCallBack = new FacebookCallback<LoginResult>() {
         @Override
         public void onSuccess(LoginResult loginResult) {
-
             progressDialog.dismiss();
-
             // App code
             GraphRequest request = GraphRequest.newMeRequest(
                     loginResult.getAccessToken(),
@@ -105,11 +108,13 @@ public class LoginActivity extends AppCompatActivity {
                         public void onCompleted(
                                 JSONObject object,
                                 GraphResponse response) {
-
-                            System.out.println("response: " + response + "");
+                            System.out.println("object: " + object + "");
                             try {
-                                user = new Personne(object.getString("firstname").toString(),
-                                        object.getString("name").toString(),
+                                String longName = object.getString("name").toString();
+                                String fname = longName.substring(0, longName.indexOf(" "));
+                                String name = longName.substring(longName.indexOf(" "), longName.length());
+                                user = new Personne(fname,
+                                        name,
                                         object.getString("email").toString()
                                         );
                                 user.facebookID = object.getString("id").toString();
@@ -120,10 +125,9 @@ public class LoginActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                             Toast.makeText(LoginActivity.this, "welcome " + user.getNom(), Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(LoginActivity.this, LogoutActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                             finish();
-
                         }
 
                     });

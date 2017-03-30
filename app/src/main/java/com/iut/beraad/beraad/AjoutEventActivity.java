@@ -183,50 +183,5 @@ public class AjoutEventActivity extends AppCompatActivity {
         }
     }
 
-    public int moisToInt(String s) {
-        int mois;
-        switch (s) {
-            case "Janvier":
-                mois = 0;
-                break;
-            case "Février":
-                mois = 1;
-                break;
-            case "Mars":
-                mois = 2;
-                break;
-            case "Avril":
-                mois = 3;
-                break;
-            case "Mai":
-                mois = 4;
-                break;
-            case "Juin":
-                mois = 5;
-                break;
-            case "Juillet":
-                mois = 6;
-                break;
-            case "Août":
-                mois = 7;
-                break;
-            case "Septembre":
-                mois = 8;
-                break;
-            case "Octobre":
-                mois = 9;
-                break;
-            case "Novembre":
-                mois = 10;
-                break;
-            case "Décembre":
-                mois = 11;
-                break;
-            default:
-                mois = -1;
-                break;
-        }
-        return mois;
-    }
 
 }
