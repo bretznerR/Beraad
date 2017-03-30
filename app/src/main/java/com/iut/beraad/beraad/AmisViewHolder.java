@@ -12,8 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -63,7 +61,7 @@ public class AmisViewHolder extends RecyclerView.ViewHolder {
                         .setPositiveButton("Oui", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                
                             }
                         })
                         .setNegativeButton("Non", null)

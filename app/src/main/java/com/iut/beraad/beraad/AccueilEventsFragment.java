@@ -16,8 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.facebook.Profile;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -42,6 +40,7 @@ public class AccueilEventsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.content_accueil_events,container,false);
         this.evenements_trie_date = new TreeSet(new ComparateurParDate());
+
         new MyDownloadTask().execute();
 
         evenementAdapter = new EvenementAdapter(evenements_trie_date);
@@ -98,7 +97,7 @@ public class AccueilEventsFragment extends Fragment {
                                         DateTest.makeDateFromString(obj.getString("dateEvent")),
                                         obj.getString("description"),
                                         new Adresse(obj.getString("numero"),obj.getString("rue"),obj.getString("ville"),obj.getString("codePostal")),
-                                        new Personne(obj.getString("idFacebook"),"r","t"),
+                                        new Personne(obj.getString("idFacebook"),obj.getString("prenomUtilisateur"),obj.getString("nomUtilisateur")),
                                         false));
                             }
                         } catch (Exception e) {
@@ -154,7 +153,7 @@ public class AccueilEventsFragment extends Fragment {
                             DateTest.makeDateFromString(obj.getString("dateEvent")),
                             obj.getString("description"),
                             new Adresse(obj.getString("numero"),obj.getString("rue"),obj.getString("ville"),obj.getString("codePostal")),
-                            new Personne(Profile.getCurrentProfile().getId(), Profile.getCurrentProfile().getFirstName(), Profile.getCurrentProfile().getLastName()),
+                            new Personne(obj.getString("idFacebook"),obj.getString("prenomUtilisateur"),obj.getString("nomUtilisateur")),
                             false));
                 }
             } catch (Exception e) {
