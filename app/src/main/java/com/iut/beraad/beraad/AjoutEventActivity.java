@@ -123,6 +123,7 @@ public class AjoutEventActivity extends AppCompatActivity {
                         +"&ville="+adresse[2]
                         +"&codePostal="+adresse[3];
                 new MyDownloadTask().execute();
+
             }
         });
     }

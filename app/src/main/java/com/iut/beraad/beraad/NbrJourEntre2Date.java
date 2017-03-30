@@ -9,7 +9,7 @@ public class NbrJourEntre2Date
     {
         //long UNE_HEURE = 60 * 60 * 1000L;
         //return ((date2.getTime() - date1.getTime() + UNE_HEURE) / (UNE_HEURE * 24));
-        return ((date2.getTime() - date1.getTime())/(1000*60*60*24))-30;
+        return ((date2.getTime() - date1.getTime())/(1000*60*60*24));
     }
 
 
